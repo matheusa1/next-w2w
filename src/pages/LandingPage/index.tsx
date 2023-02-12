@@ -2,7 +2,7 @@ import landingPageImage from "@/assets/images/landingPage.svg";
 import Image from "next/image";
 import { ReactElement } from "react";
 
-export const LandingPage = (): ReactElement => {
+const LandingPage = (): ReactElement => {
   return (
     <div className="flex flex-col gap-6 items-center justify-center h-screen">
       <Image src={landingPageImage} alt={"img"} />
@@ -24,3 +24,5 @@ export const LandingPage = (): ReactElement => {
     </div>
   );
 };
+
+export default LandingPage;

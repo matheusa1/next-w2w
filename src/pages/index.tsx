@@ -1,7 +1,6 @@
-import React from "react";
-import { LandingPage } from "./LandingPage";
+import LandingPage from "./LandingPage";
 
-const Index: React.FC = () => {
+const Index = () => {
   return <LandingPage />;
 };
 
