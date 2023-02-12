@@ -1,7 +1,7 @@
-import React from "react";
+import LandingPage from "./LandingPage";
 
-const Index: React.FC = () => {
-  return <div />;
+const Index = () => {
+  return <LandingPage />;
 };
 
 export default Index;
