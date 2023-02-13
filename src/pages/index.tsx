@@ -1,7 +1,5 @@
 import { LandingPage } from "./landingPage";
 
-const Index = () => {
+export default function Index() {
   return <LandingPage />;
-};
-
-export default Index;
+}
