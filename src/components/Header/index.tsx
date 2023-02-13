@@ -1,30 +1,65 @@
-import { ReactElement } from "react";
+import { ReactElement, useEffect, useState } from "react";
 
 import logo from "@/assets/logo.svg";
 import Image from "next/image";
 
-import { BsGrid } from "react-icons/bs";
+import { BsGrid, BsList, BsSearch } from "react-icons/bs";
+import MenuItem from "../MenuItem";
 
 const Header = (): ReactElement => {
+  const iconsClassNames =
+    "text-white w-6 h-6 md:hidden hover:text-slate-400 active:text-blue-300 transition-all duration-300";
+
+  const [selected, setSelected] = useState<
+    "home" | "category" | "search" | undefined
+  >("home");
+
+  const handleSelected = (
+    selected: "home" | "category" | "search" | undefined
+  ) => {
+    setSelected(selected);
+  };
+
+  const getSelected = () => {
+    const path = window.location.pathname;
+    if (path === "/home") {
+      handleSelected("home");
+    } else if (path === "/category") {
+      handleSelected("category");
+    } else if (path === "/search") {
+      handleSelected("search");
+    }
+  };
+
+  useEffect(() => {
+    getSelected();
+  });
+
   return (
     <div className="hidden sm:block p-6">
-      <div className="flex justify-between">
-        <Image className="w-20" src={logo} alt={"logoimage"} />
+      <div className="flex justify-between items-center">
+        <MenuItem
+          active={selected === "home"}
+          link={"/home"}
+          icon={
+            <Image priority className="w-20" src={logo} alt={"logoimage"} />
+          }
+        />
 
-        <div>
-          <BsGrid className="text-white" />
-          <span>Categoria</span>
-        </div>
+        <MenuItem
+          active={selected === "category"}
+          link="/category"
+          icon={<BsGrid className={iconsClassNames} />}
+          text={"Categoria"}
+        />
+        <MenuItem
+          active={selected === "search"}
+          link="/search"
+          icon={<BsSearch className={iconsClassNames} />}
+          text={"Pesquisa"}
+        />
 
-        <div>
-          <BsGrid className="text-white" />
-          <span>Pesquisar</span>
-        </div>
-
-        <div>
-          <BsGrid className="text-white" />
-          
-        </div>
+        <BsList className="text-white w-8 h-8 hover:scale-110 hover:text-slate-400 active:text-blue-300" />
       </div>
     </div>
   );
