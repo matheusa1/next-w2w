@@ -3,7 +3,7 @@ import Image from "next/image";
 import { ReactElement } from "react";
 import { Autoplay } from "swiper";
 import "swiper/css";
-import { Swiper,SwiperSlide } from "swiper/react";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 import Avengers from "@/assets/images/Avengers.jpg";
 import Minions from "@/assets/images/Minions.jpg";
