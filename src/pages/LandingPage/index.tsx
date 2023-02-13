@@ -12,7 +12,7 @@ import starWars from "@/assets/images/starWars.jpg";
 import transformers from "@/assets/images/transformers.jpg";
 import { useRouter } from "next/router";
 
-const LandingPage = (): ReactElement => {
+export const LandingPage = (): ReactElement => {
   const router = useRouter();
 
   const handleEnter = () => {
@@ -71,5 +71,3 @@ const LandingPage = (): ReactElement => {
     </div>
   );
 };
-
-export default LandingPage;
