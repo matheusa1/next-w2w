@@ -39,4 +39,4 @@ yarn.lock
 packege-lock.json
 
 # environment variables
-.evn
+.env
