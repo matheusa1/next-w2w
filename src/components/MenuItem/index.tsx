@@ -24,7 +24,7 @@ const MenuItem = ({
     >
       {icon}
       <span
-        className={`hidden md:block text-white hover:text-slate-400 active:text-blue-300 transition-all duration-300 ${
+        className={`hidden md:block dark:text-white  hover:text-slate-400 active:text-blue-300 transition-all duration-300 ${
           active && "font-bold"
         }`}
       >
