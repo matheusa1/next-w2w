@@ -1,3 +1,4 @@
+import { Rating } from "@material-ui/lab";
 import Image from "next/image";
 import { ReactElement } from "react";
 
@@ -26,11 +27,16 @@ const TrendingMovieCard = (props: TrendingMovieCardProps): ReactElement => {
       <div className="absolute bottom-0 left-0 w-full bg-linearCard h-40" />
       <div className="absolute bottom-4 grid grid-cols-2 gap-4 left-4 right-4 text-white font-axiforma">
         <div className="flex flex-col self-start gap-2">
-          <span className="text-lg font-bold">{title}</span>
+          <span className="text-base font-bold">{title}</span>
           <span className="text-xs ">{original_title}</span>
         </div>
-        <div className="self-end justify-self-end">
-          <div />
+        <div className="flex flex-col gap-2 items-end justify-end">
+          <Rating
+            name="half-rating"
+            readOnly
+            defaultValue={vote_average}
+            precision={0.1}
+          />
           <span className="text-xs">De {vote_count} usuários</span>
         </div>
       </div>

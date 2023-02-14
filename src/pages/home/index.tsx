@@ -16,7 +16,7 @@ const Home = (): ReactElement => {
     try {
       await axios
         .get(
-          `${bestsMovies}trending/movie/day?${apiKey}&language=pt-BR&append_to_response=production_companies`
+          `${bestsMovies}trending/all/day?${apiKey}&language=pt-BR&append_to_response=production_companies`
         )
         .then((res) => setMovies(res.data.results));
       console.log(movies);
@@ -33,10 +33,12 @@ const Home = (): ReactElement => {
   return (
     <div className="p-4">
       <div className="flex flex-col gap-2">
-        <span className="font-axiforma text-sm">Trend do dia.</span>
+        <span className="font-axiforma text-sm dark:text-white darkT">
+          Trend do dia.
+        </span>
         {movies.length > 0 ? (
           <Swiper
-            className="w-full"
+            className="w-full sm:w-[607px] sm:overflow-visible"
             spaceBetween={30}
             modules={[Autoplay]}
             loop={true}
@@ -47,7 +49,7 @@ const Home = (): ReactElement => {
           >
             {movies.map((movie) => {
               return (
-                <SwiperSlide key={movie?.id} className="w-full h-10">
+                <SwiperSlide key={movie?.id} className="w-full">
                   <TrendingMovieCard
                     title={movie?.title}
                     backdrop_path={movie?.backdrop_path}

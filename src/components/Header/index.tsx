@@ -70,7 +70,7 @@ const Header = (): ReactElement => {
               <BsList className="dark:text-white transition-all duration-300 w-8 h-8 hover:scale-110 hover:text-purple-500 dark:hover:text-slate-400 active:text-blue-300" />
             </Dialog.Trigger>
             <Dialog.Portal>
-              <Dialog.Overlay className="hidden sm:block sm:fixed inset-0 bg-black opacity-70" />
+              <Dialog.Overlay className="hidden z-40 sm:block sm:fixed inset-0 bg-black opacity-70" />
               <Sidebar />
             </Dialog.Portal>
           </Dialog.Root>
