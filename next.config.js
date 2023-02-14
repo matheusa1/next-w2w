@@ -10,6 +10,9 @@ const nextConfig = {
     TV: process.env.TV,
     BASE_URL: process.env.BASE_URL,
   },
+  images: {
+    domains: ["image.tmdb.org"],
+  },
 };
 
 module.exports = nextConfig;
