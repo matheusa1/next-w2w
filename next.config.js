@@ -8,6 +8,7 @@ const nextConfig = {
     IMAGE: process.env.IMAGE,
     MOVIE: process.env.MOVIE,
     TV: process.env.TV,
+    BASE_URL: process.env.BASE_URL,
   },
 };
 
