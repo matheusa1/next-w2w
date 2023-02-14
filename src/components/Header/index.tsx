@@ -6,6 +6,9 @@ import MenuItem from "../MenuItem";
 import { switchTheme } from "@/utils/switchTheme";
 import { FaLightbulb } from "react-icons/fa";
 
+import * as Dialog from "@radix-ui/react-dialog";
+import Sidebar from "../Sidebar";
+
 const Header = (): ReactElement => {
   const iconsClassNames =
     "text-black dark:text-white w-6 h-6 md:hidden dark:hover:text-slate-400 hover:text-purple-500 active:text-blue-300 transition-all duration-300";
@@ -62,7 +65,15 @@ const Header = (): ReactElement => {
             text={"Pesquisa"}
           />
 
-          <BsList className="dark:text-white transition-all duration-300 w-8 h-8 hover:scale-110 hover:text-purple-500 dark:hover:text-slate-400 active:text-blue-300" />
+          <Dialog.Root>
+            <Dialog.Trigger asChild>
+              <BsList className="dark:text-white transition-all duration-300 w-8 h-8 hover:scale-110 hover:text-purple-500 dark:hover:text-slate-400 active:text-blue-300" />
+            </Dialog.Trigger>
+            <Dialog.Portal>
+              <Dialog.Overlay className="hidden sm:block sm:fixed inset-0 bg-black opacity-70" />
+              <Sidebar />
+            </Dialog.Portal>
+          </Dialog.Root>
         </div>
       </div>
       <div className="sm:hidden p-2 w-full flex justify-center">
