@@ -33,10 +33,11 @@ const Home = (): ReactElement => {
   return (
     <div className="p-4">
       <div className="flex flex-col gap-2">
-        <span>Trend do dia</span>
+        <span className="font-axiforma text-sm">Trend do dia.</span>
         {movies.length > 0 ? (
           <Swiper
             className="w-full"
+            spaceBetween={30}
             modules={[Autoplay]}
             loop={true}
             autoplay={{

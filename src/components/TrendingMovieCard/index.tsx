@@ -24,10 +24,10 @@ const TrendingMovieCard = (props: TrendingMovieCardProps): ReactElement => {
         alt={""}
       />
       <div className="absolute bottom-0 left-0 w-full bg-linearCard h-40" />
-      <div className="absolute bottom-4 grid grid-cols-2 gap-4 left-4 right-4 text-white">
+      <div className="absolute bottom-4 grid grid-cols-2 gap-4 left-4 right-4 text-white font-axiforma">
         <div className="flex flex-col self-start gap-2">
           <span className="text-lg font-bold">{title}</span>
-          <span className="text-xs">{original_title}</span>
+          <span className="text-xs ">{original_title}</span>
         </div>
         <div className="self-end justify-self-end">
           <div />

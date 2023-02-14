@@ -16,6 +16,7 @@ module.exports = {
     },
     fontFamily: {
       margarine: ["Margarine", "cursive"],
+      axiforma: ["Axiforma", "sans-serif"],
     },
   },
   plugins: [],
