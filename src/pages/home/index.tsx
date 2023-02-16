@@ -1,4 +1,4 @@
-import MoviesCarousel from "@/components/MoviesCarousel";
+import { MoviesCarousel, SeriesCarousel } from "@/components/MoviesCarousel";
 import { movieProps, tvProps } from "@/types";
 import axios from "axios";
 import { ReactElement, useEffect, useState } from "react";
@@ -38,9 +38,9 @@ const Home = (): ReactElement => {
           Trend do dia.
         </span>
         <span className="dark:text-white text-xs text-end">Filmes</span>
-        <MoviesCarousel media={movies} />
+        <MoviesCarousel movie={movies} />
         <span className="dark:text-white text-xs text-end">Séries</span>
-        <MoviesCarousel media={series} tv />
+        <SeriesCarousel series={series} />
       </div>
     </div>
   );

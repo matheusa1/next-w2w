@@ -12,7 +12,7 @@ interface TrendingMovieCardProps {
 
 const API_Image = process.env.IMAGE;
 
-const TrendingMovieCard = (props: TrendingMovieCardProps): ReactElement => {
+export const TrendingMovieCard = (props: TrendingMovieCardProps): ReactElement => {
   const { title, backdrop_path, vote_average, vote_count, original_title } =
     props;
   return (
@@ -43,5 +43,3 @@ const TrendingMovieCard = (props: TrendingMovieCardProps): ReactElement => {
     </div>
   );
 };
-
-export default TrendingMovieCard;

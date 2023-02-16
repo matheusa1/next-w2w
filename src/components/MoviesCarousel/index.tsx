@@ -1,18 +1,23 @@
-import TrendingMovieCard from "@/components/TrendingMovieCard";
+import { TrendingMovieCard } from "@/components/TrendingMovieCard";
 import { movieProps, tvProps } from "@/types";
 import { ReactElement } from "react";
 import { Autoplay } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 interface MoviesCarouselProps {
-  media: movieProps[] | tvProps[];
-  tv?: boolean;
+  movie: movieProps[];
 }
 
-const MoviesCarousel = ({ media, tv }: MoviesCarouselProps): ReactElement => {
+interface SeriesCarouselProps {
+  series: tvProps[];
+}
+
+export const MoviesCarousel = ({
+  movie,
+}: MoviesCarouselProps): ReactElement => {
   return (
     <>
-      {media.length > 0 ? (
+      {movie.length > 0 ? (
         <Swiper
           className="w-full sm:w-[607px] sm:overflow-visible"
           spaceBetween={30}
@@ -23,16 +28,10 @@ const MoviesCarousel = ({ media, tv }: MoviesCarouselProps): ReactElement => {
             disableOnInteraction: true,
           }}
         >
-          {media.map((media) => {
+          {movie.map((movie) => {
             return (
-              <SwiperSlide key={media?.id} className="w-full">
-                <TrendingMovieCard
-                  title={tv ? media?.name : media?.title}
-                  backdrop_path={media?.backdrop_path}
-                  vote_average={media?.vote_average}
-                  vote_count={media?.vote_count}
-                  original_title={tv? media?.original_name : media?.original_title}
-                />
+              <SwiperSlide key={movie?.id} className="w-full">
+                <TrendingMovieCard {...movie} />
               </SwiperSlide>
             );
           })}
@@ -44,4 +43,37 @@ const MoviesCarousel = ({ media, tv }: MoviesCarouselProps): ReactElement => {
   );
 };
 
-export default MoviesCarousel;
+export const SeriesCarousel = ({
+  series,
+}: SeriesCarouselProps): ReactElement => {
+  return (
+    <>
+      {series.length > 0 ? (
+        <Swiper
+          className="w-full sm:w-[607px] sm:overflow-visible"
+          spaceBetween={30}
+          modules={[Autoplay]}
+          loop={true}
+          autoplay={{
+            delay: 2000,
+            disableOnInteraction: true,
+          }}
+        >
+          {series.map((media) => {
+            return (
+              <SwiperSlide key={media?.id} className="w-full">
+                <TrendingMovieCard
+                  title={media.name}
+                  original_title={media.original_name}
+                  {...media}
+                />
+              </SwiperSlide>
+            );
+          })}
+        </Swiper>
+      ) : (
+        <div>Carregando...</div>
+      )}
+    </>
+  );
+};
