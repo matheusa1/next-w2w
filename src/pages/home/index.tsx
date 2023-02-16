@@ -1,3 +1,4 @@
+import Divisor from "@/components/Divisor";
 import { MoviesCarousel, SeriesCarousel } from "@/components/MoviesCarousel";
 import { movieProps, tvProps } from "@/types";
 import axios from "axios";
@@ -37,10 +38,17 @@ const Home = (): ReactElement => {
         <span className="font-axiforma text-sm dark:text-white darkT">
           Trend do dia.
         </span>
-        <span className="dark:text-white text-xs text-end">Filmes</span>
-        <MoviesCarousel movie={movies} />
-        <span className="dark:text-white text-xs text-end">Séries</span>
-        <SeriesCarousel series={series} />
+        <div className="flex flex-col items-center gap-2">
+          <span className="text-transparent w-fit text-xs bg-linearPrimary bg-clip-text">
+            Filmes
+          </span>
+          <MoviesCarousel movie={movies} />
+          <Divisor />
+          <span className="text-transparent w-fit text-xs bg-linearPrimary bg-clip-text">
+            Series
+          </span>
+          <SeriesCarousel series={series} />
+        </div>
       </div>
     </div>
   );

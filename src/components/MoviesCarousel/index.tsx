@@ -1,5 +1,6 @@
 import { TrendingMovieCard } from "@/components/TrendingMovieCard";
 import { movieProps, tvProps } from "@/types";
+import { useWindowWidth } from "@react-hook/window-size";
 import { ReactElement } from "react";
 import { Autoplay } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -15,12 +16,13 @@ interface SeriesCarouselProps {
 export const MoviesCarousel = ({
   movie,
 }: MoviesCarouselProps): ReactElement => {
+  const onlyWidth = useWindowWidth();
   return (
     <>
       {movie.length > 0 ? (
         <Swiper
           className="w-full"
-          slidesPerView={3}
+          slidesPerView={onlyWidth > 1023 ? 3 : onlyWidth > 639 ? 2 : 1}
           spaceBetween={30}
           modules={[Autoplay]}
           loop={true}
@@ -47,12 +49,14 @@ export const MoviesCarousel = ({
 export const SeriesCarousel = ({
   series,
 }: SeriesCarouselProps): ReactElement => {
+  const onlyWidth = useWindowWidth();
+
   return (
     <>
       {series.length > 0 ? (
         <Swiper
           className="w-full"
-          slidesPerView={3}
+          slidesPerView={onlyWidth > 1023 ? 3 : onlyWidth > 639 ? 2 : 1}
           spaceBetween={30}
           modules={[Autoplay]}
           loop={true}
