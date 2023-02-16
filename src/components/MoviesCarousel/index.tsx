@@ -17,12 +17,21 @@ export const MoviesCarousel = ({
   movie,
 }: MoviesCarouselProps): ReactElement => {
   const onlyWidth = useWindowWidth();
+
+  const slides = () => {
+    if (onlyWidth > 1800) return 5;
+    if (onlyWidth > 1550) return 4;
+    if (onlyWidth > 1100) return 3;
+    if (onlyWidth > 700) return 2;
+    return 1;
+  };
+
   return (
     <>
       {movie.length > 0 ? (
         <Swiper
           className="w-full"
-          slidesPerView={onlyWidth > 1023 ? 3 : onlyWidth > 639 ? 2 : 1}
+          slidesPerView={slides()}
           spaceBetween={30}
           modules={[Autoplay]}
           loop={true}
@@ -51,12 +60,20 @@ export const SeriesCarousel = ({
 }: SeriesCarouselProps): ReactElement => {
   const onlyWidth = useWindowWidth();
 
+  const slides = () => {
+    if (onlyWidth > 1800) return 5;
+    if (onlyWidth > 1550) return 4;
+    if (onlyWidth > 1100) return 3;
+    if (onlyWidth > 700) return 2;
+    return 1;
+  };
+
   return (
     <>
       {series.length > 0 ? (
         <Swiper
           className="w-full"
-          slidesPerView={onlyWidth > 1023 ? 3 : onlyWidth > 639 ? 2 : 1}
+          slidesPerView={slides()}
           spaceBetween={30}
           modules={[Autoplay]}
           loop={true}

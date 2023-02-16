@@ -37,7 +37,7 @@ const Home = (): ReactElement => {
         <label className="font-axiforma dark:text-white darkT">
           Pesquise por um conteúdo
         </label>
-        <div className="mx-auto lg:w-[980px] p-[2px] bg-linearPrimary rounded-full relative mb-4">
+        <div className="lg:mx-auto lg:w-[980px] p-[2px] bg-linearPrimary rounded-full relative mb-4">
           <div className="absolute -z-10 bg-linearPrimary w-full h-full rounded-full blur-lg" />
           <input
             className="w-full darkT dark:hover:bg-transparent dark:focus:placeholder:text-white hover:bg-transparent focus:placeholder:text-black hover:text-white hover:placeholder:text-white focus:bg-yellow-50 dark:focus:bg-slate-800 dark:text-white bg-[#f1f1f1] rounded-full text-sm outline-none dark:bg-blackBg px-4 py-5 placeholder:text-[#6C6C6C] font-axiforma"
