@@ -1,25 +1,26 @@
-import TrendingMovieCard from "@/components/TrendingMovieCard";
-import { movieProps } from "@/types";
+import MoviesCarousel from "@/components/MoviesCarousel";
+import { movieProps, tvProps } from "@/types";
 import axios from "axios";
 import { ReactElement, useEffect, useState } from "react";
-import { Autoplay } from "swiper";
 import "swiper/css";
-import { Swiper, SwiperSlide } from "swiper/react";
 
 const apiKey = process.env.API_KEY;
 const bestsMovies = process.env.BASE_URL;
 
 const Home = (): ReactElement => {
   const [movies, setMovies] = useState<movieProps[]>([]);
+  const [series, setSeries] = useState<tvProps[]>([]);
 
   const getData = async () => {
     try {
       await axios
-        .get(
-          `${bestsMovies}trending/all/day?${apiKey}&language=pt-BR&append_to_response=production_companies`
-        )
+        .get(`${bestsMovies}trending/movie/day?${apiKey}&language=pt-BR`)
         .then((res) => setMovies(res.data.results));
-      console.log(movies);
+      // console.log(movies);
+      await axios
+        .get(`${bestsMovies}trending/tv/day?${apiKey}&language=pt-BR`)
+        .then((res) => setSeries(res.data.results));
+      console.log(series);
     } catch (err) {
       console.log(err);
     }
@@ -36,34 +37,10 @@ const Home = (): ReactElement => {
         <span className="font-axiforma text-sm dark:text-white darkT">
           Trend do dia.
         </span>
-        {movies.length > 0 ? (
-          <Swiper
-            className="w-full sm:w-[607px] sm:overflow-visible"
-            spaceBetween={30}
-            modules={[Autoplay]}
-            loop={true}
-            autoplay={{
-              delay: 2000,
-              disableOnInteraction: true,
-            }}
-          >
-            {movies.map((movie) => {
-              return (
-                <SwiperSlide key={movie?.id} className="w-full">
-                  <TrendingMovieCard
-                    title={movie?.title}
-                    backdrop_path={movie?.backdrop_path}
-                    vote_average={movie?.vote_average}
-                    vote_count={movie?.vote_count}
-                    original_title={movie?.original_title}
-                  />
-                </SwiperSlide>
-              );
-            })}
-          </Swiper>
-        ) : (
-          <div>Carregando...</div>
-        )}
+        <span className="dark:text-white text-xs text-end">Filmes</span>
+        <MoviesCarousel media={movies} />
+        <span className="dark:text-white text-xs text-end">Séries</span>
+        <MoviesCarousel media={series} tv />
       </div>
     </div>
   );
