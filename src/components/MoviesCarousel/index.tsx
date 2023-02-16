@@ -19,7 +19,8 @@ export const MoviesCarousel = ({
     <>
       {movie.length > 0 ? (
         <Swiper
-          className="w-full sm:w-[607px] sm:overflow-visible"
+          className="w-full"
+          slidesPerView={3}
           spaceBetween={30}
           modules={[Autoplay]}
           loop={true}
@@ -50,7 +51,8 @@ export const SeriesCarousel = ({
     <>
       {series.length > 0 ? (
         <Swiper
-          className="w-full sm:w-[607px] sm:overflow-visible"
+          className="w-full"
+          slidesPerView={3}
           spaceBetween={30}
           modules={[Autoplay]}
           loop={true}
