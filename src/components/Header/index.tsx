@@ -7,6 +7,7 @@ import { switchTheme } from "@/utils/switchTheme";
 import { FaLightbulb } from "react-icons/fa";
 
 import * as Dialog from "@radix-ui/react-dialog";
+import Link from "next/link";
 import Sidebar from "../Sidebar";
 
 const Header = (): ReactElement => {
@@ -16,6 +17,8 @@ const Header = (): ReactElement => {
   const [selected, setSelected] = useState<
     "home" | "category" | "search" | undefined
   >("home");
+
+  const [isBackButtonShown, setIsBackButtonShown] = useState(false);
 
   const handleSelected = (
     selected: "home" | "category" | "search" | undefined
@@ -27,10 +30,13 @@ const Header = (): ReactElement => {
     const path = window.location.pathname;
     if (path === "/home") {
       handleSelected("home");
+      setIsBackButtonShown(false);
     } else if (path === "/category") {
       handleSelected("category");
+      setIsBackButtonShown(true);
     } else if (path === "/search") {
       handleSelected("search");
+      setIsBackButtonShown(true);
     }
   };
 
@@ -76,7 +82,16 @@ const Header = (): ReactElement => {
           </Dialog.Root>
         </div>
       </div>
-      <div className="flex w-full justify-center p-2 sm:hidden">
+      <div
+        className={`flex w-full ${
+          isBackButtonShown ? "justify-between" : "justify-center"
+        } p-2 sm:hidden`}
+      >
+        {isBackButtonShown && (
+          <Link href={"/home"} className={"dark:text-white"}>
+            Voltar
+          </Link>
+        )}
         <FaLightbulb
           onClick={switchTheme}
           className="h-6 w-6 text-slate-900 transition-all duration-300 hover:scale-110 hover:text-blue-300 active:text-purple-400 dark:text-white"
