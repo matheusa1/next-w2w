@@ -9,9 +9,9 @@ interface LayoutProps {
 
 const Layout = ({ children }: LayoutProps): ReactElement => {
   return (
-    <div className="max-w-screen overflow-x-hidden">
+    <div className="max-w-screen min-h-screen overflow-x-hidden">
       <Header />
-      <main className="bg-green-500">{children}</main>
+      <main>{children}</main>
     </div>
   );
 };
