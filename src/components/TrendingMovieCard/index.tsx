@@ -18,7 +18,7 @@ export const TrendingMovieCard = (
   const { title, backdrop_path, vote_average, vote_count, original_title } =
     props;
   return (
-    <div className="relative rounded-2xl overflow-hidden">
+    <div className="relative overflow-hidden rounded-2xl">
       <Image
         width={1000}
         height={100}
@@ -27,13 +27,13 @@ export const TrendingMovieCard = (
         alt={"Movie Image"}
         priority
       />
-      <div className="absolute bottom-0 left-0 w-full bg-linearCard h-40" />
-      <div className="absolute bottom-4 grid grid-cols-2 gap-4 left-4 right-4 text-white font-axiforma">
-        <div className="flex flex-col self-start gap-2">
+      <div className="absolute bottom-0 left-0 h-40 w-full bg-linearCard" />
+      <div className="absolute bottom-4 left-4 right-4 grid grid-cols-2 gap-4 font-axiforma text-white">
+        <div className="flex flex-col gap-2 self-start">
           <span className="text-base font-bold">{title}</span>
           <span className="text-xs ">{original_title}</span>
         </div>
-        <div className="flex flex-col gap-2 items-end justify-end">
+        <div className="flex flex-col items-end justify-end gap-2">
           <Rating
             name="half-rating"
             readOnly

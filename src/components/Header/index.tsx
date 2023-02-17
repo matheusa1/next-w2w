@@ -40,13 +40,13 @@ const Header = (): ReactElement => {
 
   return (
     <>
-      <div className="hidden sm:block p-6">
-        <div className="flex justify-between items-center">
+      <div className="hidden p-6 sm:block">
+        <div className="flex items-center justify-between">
           <MenuItem
             active={selected === "home"}
             link="/home"
             icon={
-              <span className="text-3xl font-margarine dark:text-white hover:text-purple-500 active:text-blue-300 transition-colors duration-300">
+              <span className="font-margarine text-3xl transition-colors duration-300 hover:text-purple-500 active:text-blue-300 dark:text-white">
                 W2w
               </span>
             }
@@ -67,19 +67,19 @@ const Header = (): ReactElement => {
 
           <Dialog.Root>
             <Dialog.Trigger asChild>
-              <BsList className="dark:text-white transition-all duration-300 w-8 h-8 hover:scale-110 hover:text-purple-500 dark:hover:text-slate-400 active:text-blue-300" />
+              <BsList className="h-8 w-8 transition-all duration-300 hover:scale-110 hover:text-purple-500 active:text-blue-300 dark:text-white dark:hover:text-slate-400" />
             </Dialog.Trigger>
             <Dialog.Portal>
-              <Dialog.Overlay className="hidden z-40 sm:block sm:fixed inset-0 bg-black opacity-70" />
+              <Dialog.Overlay className="inset-0 z-40 hidden bg-black opacity-70 sm:fixed sm:block" />
               <Sidebar />
             </Dialog.Portal>
           </Dialog.Root>
         </div>
       </div>
-      <div className="sm:hidden p-2 w-full flex justify-center">
+      <div className="flex w-full justify-center p-2 sm:hidden">
         <FaLightbulb
           onClick={switchTheme}
-          className="dark:text-white transition-all duration-300 hover:scale-110 hover:text-blue-300 active:text-purple-400 text-slate-900 w-6 h-6"
+          className="h-6 w-6 text-slate-900 transition-all duration-300 hover:scale-110 hover:text-blue-300 active:text-purple-400 dark:text-white"
         />
       </div>
     </>

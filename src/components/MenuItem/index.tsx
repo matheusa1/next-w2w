@@ -17,14 +17,14 @@ const MenuItem = ({
   return (
     <Link
       href={link}
-      className={`items-center flex hover:scale-110 transition-all duration-300 relative ${
+      className={`relative flex items-center transition-all duration-300 hover:scale-110 ${
         active &&
-        "after:bg-blue-300 after:w-2 after:h-2 after:absolute after:-bottom-3 after:left-1/2 after:rounded-full after:-translate-x-1/2"
+        "after:absolute after:-bottom-3 after:left-1/2 after:h-2 after:w-2 after:-translate-x-1/2 after:rounded-full after:bg-blue-300"
       }`}
     >
       {icon}
       <span
-        className={`hidden md:block dark:text-white  hover:text-slate-400 active:text-blue-300 transition-all duration-300 ${
+        className={`hidden transition-all duration-300  hover:text-slate-400 active:text-blue-300 dark:text-white md:block ${
           active && "font-bold"
         }`}
       >

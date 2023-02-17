@@ -10,5 +10,5 @@ body {
 }
 
 .darkT {
-  @apply transition-colors duration-500
+  @apply transition-colors duration-500;
 }

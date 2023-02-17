@@ -20,10 +20,10 @@ export default function LandingPage(): ReactElement {
   };
 
   return (
-    <div className="flex flex-col gap-6 items-center justify-center h-screen">
-      <div className="hidden opacity-50 blur-sm -z-10 2xl:block absolute top-0 left-0 w-screen h-screen">
+    <div className="flex h-screen flex-col items-center justify-center gap-6">
+      <div className="absolute top-0 left-0 -z-10 hidden h-screen w-screen opacity-50 blur-sm 2xl:block">
         <Swiper
-          className="text-white w-full h-full"
+          className="h-full w-full text-white"
           autoplay={{
             delay: 3000,
             disableOnInteraction: false,
@@ -31,19 +31,19 @@ export default function LandingPage(): ReactElement {
           loop={true}
           modules={[Autoplay]}
         >
-          <SwiperSlide className="w-full h-full">
+          <SwiperSlide className="h-full w-full">
             <Image className="object-contain" src={starWars} alt={"starWars"} />
           </SwiperSlide>
-          <SwiperSlide className="w-full h-full">
+          <SwiperSlide className="h-full w-full">
             <Image className="object-contain" src={Avengers} alt={"Avengers"} />
           </SwiperSlide>
-          <SwiperSlide className="w-full h-full">
+          <SwiperSlide className="h-full w-full">
             <Image className="object-contain" src={Minions} alt={"Minions"} />
           </SwiperSlide>
-          <SwiperSlide className="w-full h-full">
+          <SwiperSlide className="h-full w-full">
             <Image className="object-contain" src={naked} alt={"naked"} />
           </SwiperSlide>
-          <SwiperSlide className="w-full h-full">
+          <SwiperSlide className="h-full w-full">
             <Image
               className="object-contain"
               src={transformers}
@@ -53,15 +53,15 @@ export default function LandingPage(): ReactElement {
         </Swiper>
       </div>
       <Image src={landingPageImage} alt={"img"} />
-      <div className="flex flex-col items-center gap-6 w-64 mx-auto">
-        <h1 className="text-white text-3xl font-bold">Where To Watch</h1>
+      <div className="mx-auto flex w-64 flex-col items-center gap-6">
+        <h1 className="text-3xl font-bold text-white">Where To Watch</h1>
         <p className="text-white">Onde assistir o seu filme desejado!</p>
         <div className="relative w-full">
-          <div className="absolute -z-10 bg-linearPrimary w-full h-full rounded-full blur-lg" />
-          <div className="bg-linearPrimary rounded-full p-[2px]">
+          <div className="absolute -z-10 h-full w-full rounded-full bg-linearPrimary blur-lg" />
+          <div className="rounded-full bg-linearPrimary p-[2px]">
             <button
               onClick={handleEnter}
-              className="transition-all active:bg-transparent hover:bg-slate-800 w-full py-2 text-white bg-blackBg font-bold rounded-full "
+              className="w-full rounded-full bg-blackBg py-2 font-bold text-white transition-all hover:bg-slate-800 active:bg-transparent "
             >
               Entrar
             </button>

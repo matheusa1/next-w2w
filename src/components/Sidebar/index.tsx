@@ -6,8 +6,8 @@ import Divisor from "../Divisor";
 
 const Sidebar = (): ReactElement => {
   return (
-    <Dialog.Content className="hidden z-50 sm:fixed top-0 right-0 w-96 h-screen bg-slate-200 sm:flex flex-col items-center justify-between p-6 dark:bg-slate-900 dark:text-white darkT">
-      <div className="flex flex-col gap-4 w-full items-center">
+    <Dialog.Content className="darkT top-0 right-0 z-50 hidden h-screen w-96 flex-col items-center justify-between bg-slate-200 p-6 dark:bg-slate-900 dark:text-white sm:fixed sm:flex">
+      <div className="flex w-full flex-col items-center gap-4">
         <Link href={"/home"}>Quem Somos</Link>
         <Divisor />
         <button onClick={switchTheme}>Trocar Tema</button>
@@ -16,7 +16,7 @@ const Sidebar = (): ReactElement => {
           Código Fonte
         </Link>
       </div>
-      <Dialog.Close asChild className="cursor-pointer h-fit">
+      <Dialog.Close asChild className="h-fit cursor-pointer">
         <span>Fechar</span>
       </Dialog.Close>
     </Dialog.Content>

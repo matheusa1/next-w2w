@@ -34,13 +34,13 @@ const Home = (): ReactElement => {
   return (
     <div className="p-4">
       <div className="flex flex-col gap-2">
-        <label className="font-axiforma dark:text-white darkT">
+        <label className="darkT font-axiforma dark:text-white">
           Pesquise por um conteúdo
         </label>
-        <div className="lg:mx-auto lg:w-[980px] p-[2px] bg-linearPrimary rounded-full relative mb-4">
-          <div className="absolute -z-10 bg-linearPrimary w-full h-full rounded-full blur-lg" />
+        <div className="relative mb-4 rounded-full bg-linearPrimary p-[2px] lg:mx-auto lg:w-[980px]">
+          <div className="absolute -z-10 h-full w-full rounded-full bg-linearPrimary blur-lg" />
           <input
-            className="w-full darkT dark:hover:bg-transparent dark:focus:placeholder:text-white hover:bg-transparent focus:placeholder:text-black hover:text-white hover:placeholder:text-white focus:bg-yellow-50 dark:focus:bg-slate-800 dark:text-white bg-[#f1f1f1] rounded-full text-sm outline-none dark:bg-blackBg px-4 py-5 placeholder:text-[#6C6C6C] font-axiforma"
+            className="darkT w-full rounded-full bg-[#f1f1f1] px-4 py-5 font-axiforma text-sm outline-none placeholder:text-[#6C6C6C] hover:bg-transparent hover:text-white hover:placeholder:text-white focus:bg-yellow-50 focus:placeholder:text-black dark:bg-blackBg dark:text-white dark:hover:bg-transparent dark:focus:bg-slate-800 dark:focus:placeholder:text-white"
             placeholder="Pesquise por um conteúdo."
             onKeyDown={(e) => {
               if (e.key === "Enter") {
@@ -51,16 +51,16 @@ const Home = (): ReactElement => {
         </div>
       </div>
       <div className="flex flex-col gap-2">
-        <span className="font-axiforma dark:text-white darkT">
+        <span className="darkT font-axiforma dark:text-white">
           Trend do dia.
         </span>
         <div className="flex flex-col items-center gap-2">
-          <span className="text-transparent w-fit text-xs bg-linearPrimary bg-clip-text">
+          <span className="w-fit bg-linearPrimary bg-clip-text text-xs text-transparent">
             Filmes
           </span>
           <MoviesCarousel movie={movies} />
           <Divisor />
-          <span className="text-transparent w-fit text-xs bg-linearPrimary bg-clip-text">
+          <span className="w-fit bg-linearPrimary bg-clip-text text-xs text-transparent">
             Series
           </span>
           <SeriesCarousel series={series} />
