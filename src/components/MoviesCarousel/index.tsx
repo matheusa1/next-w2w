@@ -1,7 +1,6 @@
 import { TrendingMovieCard } from "@/components/TrendingMovieCard";
 import { movieProps, tvProps } from "@/types";
 import { useWindowWidth } from "@react-hook/window-size";
-import Link from "next/link";
 import { ReactElement } from "react";
 import { Autoplay } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -44,7 +43,7 @@ export const MoviesCarousel = ({
           {movie.map((movie) => {
             return (
               <SwiperSlide key={movie?.id} className="w-full">
-                <TrendingMovieCard link={`/movie?${movie?.id}`} {...movie} />
+                <TrendingMovieCard {...movie} />
               </SwiperSlide>
             );
           })}
@@ -89,7 +88,7 @@ export const SeriesCarousel = ({
                 <TrendingMovieCard
                   title={media.name}
                   original_title={media.original_name}
-                  link={`/series?${media?.id}`}
+                  serie
                   {...media}
                 />
               </SwiperSlide>
