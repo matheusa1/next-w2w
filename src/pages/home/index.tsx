@@ -3,7 +3,7 @@ import { MoviesCarousel, SeriesCarousel } from "@/components/MoviesCarousel";
 import { movieProps, tvProps } from "@/types";
 import axios from "axios";
 import Image from "next/image";
-import { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useCallback, useEffect, useState } from "react";
 import "swiper/css";
 
 import Deku from "@/assets/deku.svg";
@@ -17,7 +17,7 @@ const Home = (): ReactElement => {
   const [movies, setMovies] = useState<movieProps[]>([]);
   const [series, setSeries] = useState<tvProps[]>([]);
 
-  const getData = async () => {
+  const getData = useCallback(async () => {
     try {
       await axios
         .get(`${bestsMovies}trending/movie/day?${apiKey}&language=pt-BR`)
@@ -29,12 +29,12 @@ const Home = (): ReactElement => {
     } catch (err) {
       console.log(err);
     }
-  };
+    console.log(movies);
+  }, []);
 
   useEffect(() => {
     getData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [getData]);
 
   return (
     <div className="p-4">
@@ -66,6 +66,7 @@ const Home = (): ReactElement => {
               className="absolute top-0 -left-10 transition-all duration-1000 sm:left-10"
               src={Miranha}
               alt={""}
+              priority
             />
             <div className="flex flex-col items-end text-white">
               <h1 className="font-axiforma text-sm font-bold md:text-base">
@@ -84,6 +85,7 @@ const Home = (): ReactElement => {
               className="absolute -top-8 -right-10 transition-all duration-1000 sm:right-10"
               src={Deku}
               alt={""}
+              priority
             />
             <div className="flex flex-col text-white">
               <h1 className="font-axiforma text-sm font-bold md:text-base">
