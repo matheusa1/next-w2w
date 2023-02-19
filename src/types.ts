@@ -78,3 +78,25 @@ export type movieDetailsProps = {
   vote_average: number;
   vote_count: number;
 };
+
+export type watchProvidersListProps = {
+  buy?: {
+    display_priority: number;
+    logo_path: string;
+    provider_id: number;
+    provider_name: string;
+  }[];
+  flatrate?: {
+    display_priority: number;
+    logo_path: string;
+    provider_id: number;
+    provider_name: string;
+  }[];
+  rent?: {
+    display_priority: number;
+    logo_path: string;
+    provider_id: number;
+    provider_name: string;
+  }[];
+  link?: string;
+};
