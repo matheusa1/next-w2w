@@ -6,7 +6,7 @@ export default function Document() {
       <Head>
         <link href="https://fonts.cdnfonts.com/css/axiforma" rel="stylesheet" />
       </Head>
-      <body className="darkT bg-slate-100 dark:bg-blackBg">
+      <body className="darkT bg-slate-100 dark:bg-blackBg scrollbar">
         <Main />
         <NextScript />
       </body>

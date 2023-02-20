@@ -43,18 +43,18 @@ const Movie = (): ReactElement => {
   return (
     <>
       {movieProps ? (
-        <div>
+        <div className="flex h-full">
           <Image
-            className="absolute top-0 left-0 -z-10 w-full brightness-75"
+            className="absolute md:shadow-xl md:dark:shadow-purple-900 top-0 left-0 -z-10 h-auto w-full brightness-75 md:fixed md:left-4 md:top-1/2 md:w-56 md:-translate-y-1/2 md:rounded-2xl lg:w-72 xl:w-96"
             src={`${API_Image}${movieProps?.poster_path}`}
             width={333}
             height={333}
             alt={"movieImage"}
             priority
           />
-          <div className="darkT relative mt-96 flex flex-col bg-white dark:bg-blackBg">
-            <div className="absolute -top-20 h-20 w-full bg-linearPropsLight dark:bg-linearProps" />
-            <div className="darkT flex flex-col gap-4 p-6 font-axiforma dark:text-white">
+          <div className="darkT darkT relative mt-96 flex min-h-full flex-col bg-white dark:bg-black md:mb-4 md:ml-64 md:mr-4 md:mt-0 md:min-h-full md:w-full md:rounded-xl md:shadow-xl dark:md:shadow-blue-900 lg:ml-80 xl:ml-[26rem]">
+            <div className="absolute -top-20 h-20 w-full bg-linearPropsLight dark:bg-linearProps md:hidden" />
+            <div className="darkT flex flex-col gap-4 p-6 font-axiforma dark:text-white md:w-full">
               <div className="flex flex-col gap-2">
                 <div className="flex items-center gap-2">
                   <strong className="text-2xl font-bold">
@@ -90,49 +90,51 @@ const Movie = (): ReactElement => {
 
               <span className="text-xs text-subTitle">{`Status: ${movieProps.status}`}</span>
 
-              {movieProps?.belongs_to_collection && (
-                <div className="flex flex-col gap-2">
-                  <span>Pertence a coleção:</span>
-                  <div className="flex flex-col items-center gap-2">
-                    <Image
-                      className="w-40"
-                      src={`${API_Image}${movieProps.belongs_to_collection?.poster_path}`}
-                      width={300}
-                      height={300}
-                      alt={""}
-                    />
-                    <span>{movieProps.belongs_to_collection?.name}</span>
-                  </div>
-                </div>
-              )}
-
-              {providers ? (
-                <div className="flex flex-col gap-2">
-                  <span>Onde Assistir:</span>
+              <div className="flex flex-col lg:flex-row lg:justify-between">
+                {movieProps?.belongs_to_collection && (
                   <div className="flex flex-col gap-2">
-                    <ListWatchProvider
-                      title={"Streaming"}
-                      list={providers?.flatrate}
-                    />
-
-                    <Divider />
-
-                    <ListWatchProvider
-                      title={"Alugar"}
-                      list={providers?.rent}
-                    />
-
-                    <Divider />
-
-                    <ListWatchProvider
-                      title={"Comprar"}
-                      list={providers?.buy}
-                    />
+                    <span>Pertence a coleção:</span>
+                    <div className="flex flex-col items-center gap-2">
+                      <Image
+                        className="w-40"
+                        src={`${API_Image}${movieProps.belongs_to_collection?.poster_path}`}
+                        width={300}
+                        height={300}
+                        alt={""}
+                      />
+                      <span>{movieProps.belongs_to_collection?.name}</span>
+                    </div>
                   </div>
-                </div>
-              ) : (
-                <span className="text-center">Indisponível</span>
-              )}
+                )}
+
+                {providers ? (
+                  <div className="flex flex-col gap-2">
+                    <span>Onde Assistir:</span>
+                    <div className="flex flex-col gap-2">
+                      <ListWatchProvider
+                        title={"Streaming"}
+                        list={providers?.flatrate}
+                      />
+
+                      {providers.rent && <Divider />}
+
+                      <ListWatchProvider
+                        title={"Alugar"}
+                        list={providers?.rent}
+                      />
+
+                      {providers.buy && <Divider />}
+
+                      <ListWatchProvider
+                        title={"Comprar"}
+                        list={providers?.buy}
+                      />
+                    </div>
+                  </div>
+                ) : (
+                  <span className="text-center">Onde Assistir: <br /> Indisponível</span>
+                )}
+              </div>
             </div>
           </div>
         </div>
