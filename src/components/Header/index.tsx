@@ -37,6 +37,12 @@ const Header = (): ReactElement => {
     } else if (path === "/search") {
       handleSelected("search");
       setIsBackButtonShown(true);
+    } else if (path === "/series") {
+      handleSelected(undefined);
+      setIsBackButtonShown(true);
+    } else if (path === "/movie") {
+      handleSelected(undefined);
+      setIsBackButtonShown(true);
     }
   };
 
@@ -88,13 +94,27 @@ const Header = (): ReactElement => {
         } p-2 sm:hidden`}
       >
         {isBackButtonShown && (
-          <Link href={"/home"} className={"dark:text-white"}>
+          <Link
+            href={"/home"}
+            // className={`${
+            //   window.location.pathname === "/serie" ||
+            //   window.location.pathname === "/movie"
+            //     ? "text-white"
+            //     : "dark:text-white"
+            // }`}
+            className="text-white"
+          >
             Voltar
           </Link>
         )}
         <FaLightbulb
           onClick={switchTheme}
-          className="h-6 w-6 text-slate-900 transition-all duration-300 hover:scale-110 hover:text-blue-300 active:text-purple-400 dark:text-white"
+          // className={`${
+          //   window.location.pathname === "/serie" ||
+          //   window.location.pathname === "/movie"
+          //     ? "text-white"
+          //     : "dark:text-white"}
+          className={`h-6 w-6 text-slate-900 transition-all duration-300 hover:scale-110 hover:text-blue-300 active:text-purple-400 `}
         />
       </div>
     </>

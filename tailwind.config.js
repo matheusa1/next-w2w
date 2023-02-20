@@ -6,6 +6,7 @@ module.exports = {
     extend: {
       colors: {
         blackBg: "#18181B",
+        subTitle: "#848484",
       },
       backgroundImage: {
         linearPrimary:
@@ -16,6 +17,10 @@ module.exports = {
           "linear-gradient(180deg, #16CAF1 0%, #0143A7 78.65%);",
         linearCategoryRed:
           "linear-gradient(179.71deg, #FF2E2E 27.14%, #E08939 99.75%);",
+        linearProps:
+          "linear-gradient(179.99deg, rgba(0, 0, 0, 0) 10.79%, #1A1A1D 95%)",
+        linearPropsLight:
+          "linear-gradient(179.99deg, rgba(0, 0, 0, 0) 10.79%, #FFFFFF 95%)",
       },
       borderRadius: {
         tm: "75% 25% 25% 25% / 40% 25% 25% 25%",

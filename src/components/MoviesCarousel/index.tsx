@@ -88,6 +88,7 @@ export const SeriesCarousel = ({
                 <TrendingMovieCard
                   title={media.name}
                   original_title={media.original_name}
+                  serie
                   {...media}
                 />
               </SwiperSlide>
