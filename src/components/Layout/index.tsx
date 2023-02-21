@@ -11,7 +11,7 @@ const Layout = ({ children }: LayoutProps): ReactElement => {
   return (
     <div className="max-w-screen min-h-screen overflow-x-hidden">
       <Header />
-      <main>{children}</main>
+      <main >{children}</main>
     </div>
   );
 };

@@ -15,13 +15,13 @@ const Header = (): ReactElement => {
     "text-black dark:text-white w-6 h-6 md:hidden dark:hover:text-slate-400 hover:text-purple-500 active:text-blue-300 transition-all duration-300";
 
   const [selected, setSelected] = useState<
-    "home" | "category" | "search" | undefined
+    "home" | "category" | "search" | "series" | "movie" | undefined
   >("home");
 
   const [isBackButtonShown, setIsBackButtonShown] = useState(false);
 
   const handleSelected = (
-    selected: "home" | "category" | "search" | undefined
+    selected: "home" | "category" | "search" | "series" | "movie" | undefined
   ) => {
     setSelected(selected);
   };
@@ -38,10 +38,10 @@ const Header = (): ReactElement => {
       handleSelected("search");
       setIsBackButtonShown(true);
     } else if (path === "/series") {
-      handleSelected(undefined);
+      handleSelected("series");
       setIsBackButtonShown(true);
     } else if (path === "/movie") {
-      handleSelected(undefined);
+      handleSelected("movie");
       setIsBackButtonShown(true);
     }
   };
@@ -96,25 +96,23 @@ const Header = (): ReactElement => {
         {isBackButtonShown && (
           <Link
             href={"/home"}
-            // className={`${
-            //   window.location.pathname === "/serie" ||
-            //   window.location.pathname === "/movie"
-            //     ? "text-white"
-            //     : "dark:text-white"
-            // }`}
-            className="text-white"
+            className={`${
+              selected === "series" || selected === "movie"
+                ? "text-white"
+                : "dark:text-white"
+            }`}
           >
             Voltar
           </Link>
         )}
         <FaLightbulb
           onClick={switchTheme}
-          // className={`${
-          //   window.location.pathname === "/serie" ||
-          //   window.location.pathname === "/movie"
-          //     ? "text-white"
-          //     : "dark:text-white"}
-          className={`h-6 w-6 text-slate-900 transition-all duration-300 hover:scale-110 hover:text-blue-300 active:text-purple-400 `}
+          className={` h-6 w-6 text-slate-900 transition-all duration-300 hover:scale-110 hover:text-blue-300 active:text-purple-400 ${
+            selected === "series" || selected === "movie"
+              ? "text-white"
+              : "dark:text-white"
+          }`}
+          // className={``}
         />
       </div>
     </>

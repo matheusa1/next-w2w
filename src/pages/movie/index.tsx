@@ -45,14 +45,14 @@ const Movie = (): ReactElement => {
       {movieProps ? (
         <div className="flex h-full">
           <Image
-            className="absolute md:shadow-xl md:dark:shadow-purple-900 top-0 left-0 -z-10 h-auto w-full brightness-75 md:fixed md:left-4 md:top-1/2 md:w-56 md:-translate-y-1/2 md:rounded-2xl lg:w-72 xl:w-96"
+            className="absolute top-0 left-0 -z-10 h-auto w-full brightness-75 md:fixed md:left-4 md:top-1/2 md:w-56 md:-translate-y-1/2 md:rounded-2xl md:shadow-xl md:dark:shadow-purple-900 lg:w-72 xl:w-96"
             src={`${API_Image}${movieProps?.poster_path}`}
             width={333}
             height={333}
             alt={"movieImage"}
             priority
           />
-          <div className="darkT darkT relative mt-96 flex min-h-full flex-col bg-white dark:bg-black md:mb-4 md:ml-64 md:mr-4 md:mt-0 md:min-h-full md:w-full md:rounded-xl md:shadow-xl dark:md:shadow-blue-900 lg:ml-80 xl:ml-[26rem]">
+          <div className="darkT darkT relative mt-96 flex min-h-full flex-col bg-white dark:bg-blackBg md:dark:bg-black md:mb-4 md:ml-64 md:mr-4 md:mt-0 md:min-h-full md:w-full md:rounded-xl md:shadow-xl dark:md:shadow-blue-900 lg:ml-80 xl:ml-[26rem]">
             <div className="absolute -top-20 h-20 w-full bg-linearPropsLight dark:bg-linearProps md:hidden" />
             <div className="darkT flex flex-col gap-4 p-6 font-axiforma dark:text-white md:w-full">
               <div className="flex flex-col gap-2">
@@ -132,7 +132,9 @@ const Movie = (): ReactElement => {
                     </div>
                   </div>
                 ) : (
-                  <span className="text-center">Onde Assistir: <br /> Indisponível</span>
+                  <span className="text-center">
+                    Onde Assistir: <br /> Indisponível
+                  </span>
                 )}
               </div>
             </div>
