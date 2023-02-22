@@ -1,7 +1,8 @@
 import ListWatchProvider from "@/components/ListWatchProvider";
+import MediaDetails from "@/components/MediaDetails";
+import WhereToWatch from "@/components/WhereToWatch";
 import { movieDetailsProps, watchProvidersListProps } from "@/types";
 import { Divider } from "@material-ui/core";
-import { Rating } from "@material-ui/lab";
 import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -52,45 +53,23 @@ const Movie = (): ReactElement => {
             alt={"movieImage"}
             priority
           />
-          <div className="darkT darkT relative mt-96 flex min-h-full flex-col bg-white dark:bg-blackBg md:dark:bg-black md:mb-4 md:ml-64 md:mr-4 md:mt-0 md:min-h-full md:w-full md:rounded-xl md:shadow-xl dark:md:shadow-blue-900 lg:ml-80 xl:ml-[26rem]">
+          <div className="darkT darkT relative mt-96 flex min-h-full flex-col bg-white dark:bg-blackBg md:mb-4 md:ml-64 md:mr-4 md:mt-0 md:min-h-full md:w-full md:rounded-xl md:shadow-xl md:dark:bg-black dark:md:shadow-blue-900 lg:ml-80 xl:ml-[26rem]">
             <div className="absolute -top-20 h-20 w-full bg-linearPropsLight dark:bg-linearProps md:hidden" />
             <div className="darkT flex flex-col gap-4 p-6 font-axiforma dark:text-white md:w-full">
-              <div className="flex flex-col gap-2">
-                <div className="flex items-center gap-2">
-                  <strong className="text-2xl font-bold">
-                    {movieProps?.title}
-                  </strong>
-                  <span className="text-xs text-subTitle">
-                    {movieProps?.release_date.split("-")[0]}
-                  </span>
-                </div>
-                <span className="text-xs text-subTitle">
-                  {movieProps?.production_companies[0].name}
-                </span>
-                <div className="flex flex-col gap-1">
-                  <Rating
-                    name="half-rating"
-                    readOnly
-                    defaultValue={movieProps?.vote_average}
-                    precision={0.1}
-                  />
-                  <span className="text-xs text-subTitle">
-                    de {movieProps?.vote_count} usuários
-                  </span>
-                </div>
-              </div>
-              <span className={""}>{movieProps?.overview}</span>
-              <ul className="flex gap-3 text-xs text-subTitle">
-                {movieProps?.genres.map((genre) => (
-                  <li key={genre.id}>{genre.name}</li>
-                ))}
-              </ul>
+              <MediaDetails
+                title={movieProps?.title}
+                release_date={movieProps?.release_date}
+                production_companies={movieProps?.production_companies}
+                vote_average={movieProps?.vote_average}
+                vote_count={movieProps?.vote_count}
+                overview={movieProps?.overview}
+                genres={movieProps?.genres}
+                status={movieProps?.status}
+              />
 
               <span className="text-xs text-subTitle">{`Tempo de duração: ${movieProps.runtime} min.`}</span>
 
-              <span className="text-xs text-subTitle">{`Status: ${movieProps.status}`}</span>
-
-              <div className="flex flex-col lg:flex-row lg:justify-between">
+              <div className="flex flex-col lg:flex-row lg:justify-between gap-4">
                 {movieProps?.belongs_to_collection && (
                   <div className="flex flex-col gap-2">
                     <span>Pertence a coleção:</span>
@@ -107,35 +86,7 @@ const Movie = (): ReactElement => {
                   </div>
                 )}
 
-                {providers ? (
-                  <div className="flex flex-col gap-2">
-                    <span>Onde Assistir:</span>
-                    <div className="flex flex-col gap-2">
-                      <ListWatchProvider
-                        title={"Streaming"}
-                        list={providers?.flatrate}
-                      />
-
-                      {providers.rent && <Divider />}
-
-                      <ListWatchProvider
-                        title={"Alugar"}
-                        list={providers?.rent}
-                      />
-
-                      {providers.buy && <Divider />}
-
-                      <ListWatchProvider
-                        title={"Comprar"}
-                        list={providers?.buy}
-                      />
-                    </div>
-                  </div>
-                ) : (
-                  <span className="text-center">
-                    Onde Assistir: <br /> Indisponível
-                  </span>
-                )}
+                <WhereToWatch providers={providers} />
               </div>
             </div>
           </div>

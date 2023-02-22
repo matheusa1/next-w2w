@@ -1,5 +1,6 @@
-import { TvDetailsProps } from "@/types";
-import { Rating } from "@material-ui/lab";
+import MediaDetails from "@/components/MediaDetails";
+import WhereToWatch from "@/components/WhereToWatch";
+import { TvDetailsProps, watchProvidersListProps } from "@/types";
 import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -12,14 +13,23 @@ const API_KEY = process.env.API_KEY;
 const Series = (): ReactElement => {
   const router = useRouter();
   const [seriesInfo, setSeriesInfo] = useState<TvDetailsProps>();
+  const [providers, setProviders] = useState<watchProvidersListProps>();
   const [id, setId] = useState<number>();
 
   const getData = useCallback(() => {
     if (!id) return;
 
-    axios
-      .get(`${tvURL}${id}?${API_KEY}&language=pt-BR`)
-      .then((res) => setSeriesInfo(res.data));
+    try {
+      axios
+        .get(`${tvURL}${id}?${API_KEY}&language=pt-BR`)
+        .then((res) => setSeriesInfo(res.data));
+
+      axios
+        .get(`${tvURL}${id}/watch/providers?${API_KEY}`)
+        .then((res) => setProviders(res.data.results.BR));
+    } catch (error) {
+      console.log(error);
+    }
   }, [id]);
 
   useEffect(() => {
@@ -36,41 +46,60 @@ const Series = (): ReactElement => {
   return (
     <>
       {seriesInfo ? (
-        <div className="">
+        <div className="flex h-full">
           <Image
-            className="absolute top-0 left-0 -z-10 w-full"
+            className="absolute top-0 left-0 -z-10 h-auto w-full brightness-75 md:fixed md:left-4 md:top-1/2 md:w-56 md:-translate-y-1/2 md:rounded-2xl md:shadow-xl md:dark:shadow-purple-900 lg:w-72 xl:w-96"
             width={300}
             height={450}
             priority
             src={`${getImageURL}${seriesInfo?.poster_path}`}
             alt={"Poster image"}
           />
-          <div className="darkT relative mt-96 bg-white dark:bg-blackBg">
+          <div className="darkT darkT relative mt-96 flex min-h-full flex-col bg-white dark:bg-blackBg md:mb-4 md:ml-64 md:mr-4 md:mt-0 md:min-h-full md:w-full md:rounded-xl md:shadow-xl md:dark:bg-black dark:md:shadow-blue-900 lg:ml-80 xl:ml-[26rem]">
             <div className="absolute -top-20 h-20 w-full bg-linearPropsLight dark:bg-linearProps md:hidden" />
             <div className="p-6 dark:text-white">
-              <div className="flex flex-col gap-2">
-                <div className="flex items-center gap-2">
-                  <strong className="text-2xl font-bold">
-                    {seriesInfo?.name}
-                  </strong>
-                  <span className="text-xs text-subTitle">
-                    {seriesInfo?.first_air_date.split("-")[0]}
-                  </span>
+              <div className="flex flex-col gap-4">
+                <MediaDetails
+                  title={seriesInfo?.name}
+                  release_date={seriesInfo?.first_air_date}
+                  production_companies={seriesInfo?.production_companies}
+                  vote_average={seriesInfo?.vote_average}
+                  vote_count={seriesInfo?.vote_count}
+                  overview={seriesInfo?.overview}
+                  genres={seriesInfo?.genres}
+                  status={seriesInfo?.status}
+                />
+
+                <div className="scrollbar flex w-[90vw] md:w-[60vw] lg:w-[65vw] 2xl:w-[70vw] gap-10 overflow-x-auto pb-4">
+                  {seriesInfo?.seasons?.map((season) => (
+                    <div
+                      key={season.id}
+                      className="flex min-w-[100px] flex-col gap-2"
+                    >
+                      <div className="flex flex-col items-center">
+                        <span className="text-subTitle">
+                          Temporada {season.season_number}
+                        </span>
+                        <Image
+                          className="w-40 rounded-xl"
+                          width={300}
+                          height={450}
+                          src={`${getImageURL}${season.poster_path}`}
+                          alt={"season poster_path"}
+                        />
+                      </div>
+                      <div className="flex flex-col items-center gap-2">
+                        <span className="text-xs">
+                          Episódios: {season.episode_count}
+                        </span>
+                        <div className="flex flex-col items-center text-xs">
+                          Data de estreia<span>{season.air_date}</span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-                <span className="text-xs text-subTitle">
-                  {seriesInfo?.production_companies[0].name}
-                </span>
-                <div className="flex flex-col gap-1">
-                  <Rating
-                    name="half-rating"
-                    readOnly
-                    defaultValue={seriesInfo?.vote_average}
-                    precision={0.1}
-                  />
-                  <span className="text-xs text-subTitle">
-                    de {seriesInfo?.vote_count} usuários
-                  </span>
-                </div>
+                <WhereToWatch providers={providers} />
               </div>
             </div>
           </div>

@@ -23,7 +23,15 @@ const ListWatchProvider = ({
       {list && list.length > 0 && (
         <>
           <span className="text-center text-sm text-subTitle">{title}</span>
-          <div className="grid grid-cols-3 gap-2">
+          <div
+            className={`grid ${
+              list.length === 1
+                ? "grid-cols-1"
+                : list.length === 2
+                ? "grid-cols-2"
+                : "grid-cols-3"
+            } gap-2`}
+          >
             {list?.map((provider) => (
               <div
                 className="flex flex-col items-center gap-1"
