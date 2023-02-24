@@ -5,6 +5,7 @@ import MenuItem from "../MenuItem";
 
 import { switchTheme } from "@/utils/switchTheme";
 import { FaLightbulb } from "react-icons/fa";
+import { BiLeftArrowAlt } from "react-icons/bi";
 
 import * as Dialog from "@radix-ui/react-dialog";
 import Link from "next/link";
@@ -32,6 +33,7 @@ const Header = (): ReactElement => {
     if (path === "/home") {
       handleSelected("home");
       setIsBackButtonShown(false);
+      setIsSearchButtonShown(true);
     } else if (path === "/category") {
       handleSelected("category");
       setIsBackButtonShown(true);
@@ -93,7 +95,7 @@ const Header = (): ReactElement => {
           </Dialog.Root>
         </div>
       </div>
-      <div className={`flex w-full justify-between px-4 py-3 sm:hidden`}>
+      <div className={`flex w-full justify-between px-4 py-3 sm:hidden items-center`}>
         {isBackButtonShown ? (
           <Link
             href={"/home"}
@@ -103,7 +105,7 @@ const Header = (): ReactElement => {
                 : "dark:text-white"
             }`}
           >
-            Voltar
+            <BiLeftArrowAlt className={`w-8 h-8`} />
           </Link>
         ) : (
           <div />
@@ -128,7 +130,7 @@ const Header = (): ReactElement => {
             />
           </Link>
         ) : (
-          <div />
+          <div className="w-8 h-8"/>
         )}
       </div>
     </>

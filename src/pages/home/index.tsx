@@ -30,7 +30,6 @@ const Home = (): ReactElement => {
     } catch (err) {
       console.log(err);
     }
-    console.log(movies);
   }, []);
 
   useEffect(() => {
