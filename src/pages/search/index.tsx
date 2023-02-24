@@ -1,5 +1,5 @@
 import MainButton from "@/components/MainButton";
-import MainInput from "@/components/MainInput";
+import { SearchPageInput } from "@/components/MainInput";
 import ResultsWrapper from "@/components/ResultsWrapper";
 import axios from "axios";
 import { ReactElement, useCallback, useEffect, useState } from "react";
@@ -26,7 +26,9 @@ const Search = (): ReactElement => {
             activeButton === "movie"
               ? getMoviesBySearchQuery
               : getTvsBySearchQuery
-          }?${API_KEY}&language=pt-BR&query=${searchQuery === '' ? 'a' : searchQuery}`
+          }?${API_KEY}&language=pt-BR&query=${
+            searchQuery === "" ? "a" : searchQuery
+          }`
         )
         .then((res) => {
           if (activeButton === "movie") {
@@ -64,7 +66,15 @@ const Search = (): ReactElement => {
           </MainButton>
         </div>
       </div>
-      <MainInput />
+      <SearchPageInput
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            setSearchQuery(e.currentTarget.value);
+          }
+        }}
+        searchQuery={searchQuery}
+        onHandleSearch={setSearchQuery}
+      />
 
       <ResultsWrapper
         data={activeButton === "movie" ? movies : tvs}

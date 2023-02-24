@@ -8,8 +8,8 @@ import "swiper/css";
 
 import Deku from "@/assets/deku.svg";
 import Miranha from "@/assets/miranha.svg";
+import { MainInput } from "@/components/MainInput";
 import Link from "next/link";
-import MainInput from "@/components/MainInput";
 
 const apiKey = process.env.API_KEY;
 const bestsMovies = process.env.BASE_URL;
