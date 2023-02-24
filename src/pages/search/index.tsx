@@ -10,7 +10,7 @@ const API_KEY = process.env.API_KEY;
 
 const Search = (): ReactElement => {
   const [activeButton, setActiveButton] = useState<"movie" | "tv">("movie");
-  const [searchQuery, setSearchQuery] = useState("bra");
+  const [searchQuery, setSearchQuery] = useState("");
   const [movies, setMovies] = useState();
   const [tvs, setTvs] = useState();
 
@@ -22,13 +22,19 @@ const Search = (): ReactElement => {
     try {
       await axios
         .get(
-          `${activeButton === 'movie' ?  getMoviesBySearchQuery : getTvsBySearchQuery}?${API_KEY}&language=pt-BR&query=${searchQuery}`
+          `${
+            activeButton === "movie"
+              ? getMoviesBySearchQuery
+              : getTvsBySearchQuery
+          }?${API_KEY}&language=pt-BR&query=${searchQuery === '' ? 'a' : searchQuery}`
         )
-        .then((res) => {if(activeButton === 'movie') {
-          setMovies(res.data.results)
-        } else {
-          setTvs(res.data.results)
-        } });
+        .then((res) => {
+          if (activeButton === "movie") {
+            setMovies(res.data.results);
+          } else {
+            setTvs(res.data.results);
+          }
+        });
     } catch (error) {
       console.log(error);
     }
@@ -60,7 +66,10 @@ const Search = (): ReactElement => {
       </div>
       <MainInput />
 
-      <ResultsWrapper data={activeButton === 'movie' ? movies : tvs} type={activeButton} />
+      <ResultsWrapper
+        data={activeButton === "movie" ? movies : tvs}
+        type={activeButton}
+      />
     </div>
   );
 };

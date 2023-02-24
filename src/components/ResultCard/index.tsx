@@ -36,6 +36,7 @@ const ResultCard = ({
         alt={`${title} movie image`}
         width={300}
         height={300}
+        priority
       />
       <span className="darkT font-axiforma text-xs dark:text-white">
         {title}
