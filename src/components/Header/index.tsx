@@ -19,6 +19,7 @@ const Header = (): ReactElement => {
   >("home");
 
   const [isBackButtonShown, setIsBackButtonShown] = useState(false);
+  const [isSearchButtonShown, setIsSearchButtonShown] = useState(false);
 
   const handleSelected = (
     selected: "home" | "category" | "search" | "series" | "movie" | undefined
@@ -34,15 +35,19 @@ const Header = (): ReactElement => {
     } else if (path === "/category") {
       handleSelected("category");
       setIsBackButtonShown(true);
+      setIsSearchButtonShown(true);
     } else if (path === "/search") {
       handleSelected("search");
       setIsBackButtonShown(true);
+      setIsSearchButtonShown(false);
     } else if (path === "/series") {
       handleSelected("series");
       setIsBackButtonShown(true);
+      setIsSearchButtonShown(true);
     } else if (path === "/movie") {
       handleSelected("movie");
       setIsBackButtonShown(true);
+      setIsSearchButtonShown(true);
     }
   };
 
@@ -88,12 +93,8 @@ const Header = (): ReactElement => {
           </Dialog.Root>
         </div>
       </div>
-      <div
-        className={`flex w-full ${
-          isBackButtonShown ? "justify-between" : "justify-center"
-        } p-2 sm:hidden`}
-      >
-        {isBackButtonShown && (
+      <div className={`flex w-full justify-between px-4 py-3 sm:hidden`}>
+        {isBackButtonShown ? (
           <Link
             href={"/home"}
             className={`${
@@ -104,6 +105,8 @@ const Header = (): ReactElement => {
           >
             Voltar
           </Link>
+        ) : (
+          <div />
         )}
         <FaLightbulb
           onClick={switchTheme}
@@ -114,6 +117,19 @@ const Header = (): ReactElement => {
           }`}
           // className={``}
         />
+        {isSearchButtonShown ? (
+          <Link href={"/search"}>
+            <BsSearch
+              className={`${
+                selected === "series" || selected === "movie"
+                  ? "text-white"
+                  : "dark:text-white"
+              } w-5 h-5`}
+            />
+          </Link>
+        ) : (
+          <div />
+        )}
       </div>
     </>
   );
