@@ -5,6 +5,7 @@ import MenuItem from "../MenuItem";
 
 import { switchTheme } from "@/utils/switchTheme";
 import { FaLightbulb } from "react-icons/fa";
+import { BiLeftArrowAlt } from "react-icons/bi";
 
 import * as Dialog from "@radix-ui/react-dialog";
 import Link from "next/link";
@@ -19,6 +20,7 @@ const Header = (): ReactElement => {
   >("home");
 
   const [isBackButtonShown, setIsBackButtonShown] = useState(false);
+  const [isSearchButtonShown, setIsSearchButtonShown] = useState(false);
 
   const handleSelected = (
     selected: "home" | "category" | "search" | "series" | "movie" | undefined
@@ -31,18 +33,23 @@ const Header = (): ReactElement => {
     if (path === "/home") {
       handleSelected("home");
       setIsBackButtonShown(false);
+      setIsSearchButtonShown(true);
     } else if (path === "/category") {
       handleSelected("category");
       setIsBackButtonShown(true);
+      setIsSearchButtonShown(true);
     } else if (path === "/search") {
       handleSelected("search");
       setIsBackButtonShown(true);
+      setIsSearchButtonShown(false);
     } else if (path === "/series") {
       handleSelected("series");
       setIsBackButtonShown(true);
+      setIsSearchButtonShown(true);
     } else if (path === "/movie") {
       handleSelected("movie");
       setIsBackButtonShown(true);
+      setIsSearchButtonShown(true);
     }
   };
 
@@ -88,12 +95,8 @@ const Header = (): ReactElement => {
           </Dialog.Root>
         </div>
       </div>
-      <div
-        className={`flex w-full ${
-          isBackButtonShown ? "justify-between" : "justify-center"
-        } p-2 sm:hidden`}
-      >
-        {isBackButtonShown && (
+      <div className={`flex w-full justify-between px-4 py-3 sm:hidden items-center`}>
+        {isBackButtonShown ? (
           <Link
             href={"/home"}
             className={`${
@@ -102,8 +105,10 @@ const Header = (): ReactElement => {
                 : "dark:text-white"
             }`}
           >
-            Voltar
+            <BiLeftArrowAlt className={`w-8 h-8`} />
           </Link>
+        ) : (
+          <div />
         )}
         <FaLightbulb
           onClick={switchTheme}
@@ -114,6 +119,19 @@ const Header = (): ReactElement => {
           }`}
           // className={``}
         />
+        {isSearchButtonShown ? (
+          <Link href={"/search"}>
+            <BsSearch
+              className={`${
+                selected === "series" || selected === "movie"
+                  ? "text-white"
+                  : "dark:text-white"
+              } w-5 h-5`}
+            />
+          </Link>
+        ) : (
+          <div className="w-8 h-8"/>
+        )}
       </div>
     </>
   );

@@ -48,7 +48,7 @@ const Series = (): ReactElement => {
       {seriesInfo ? (
         <div className="flex h-full">
           <Image
-            className="absolute top-0 left-0 -z-10 h-auto w-full brightness-75 md:fixed md:left-4 md:top-1/2 md:w-56 md:-translate-y-1/2 md:rounded-2xl md:shadow-xl md:dark:shadow-purple-900 lg:w-72 xl:w-96"
+            className="absolute top-0 left-0 -z-10 h-auto w-full brightness-75 md:brightness-100 md:fixed md:left-4 md:top-1/2 md:w-56 md:-translate-y-1/2 md:rounded-2xl md:shadow-xl md:dark:shadow-purple-900 lg:w-72 xl:w-96"
             width={300}
             height={450}
             priority
