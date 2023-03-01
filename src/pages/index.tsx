@@ -53,12 +53,15 @@ export default function LandingPage(): ReactElement {
           </SwiperSlide>
         </Swiper>
       </div>
-      <Image src={landingPageImage} alt={"img"} />
-      <div className="mx-auto flex w-64 flex-col items-center gap-6">
-        <h1 className="text-3xl font-bold text-white">Where To Watch</h1>
-        <p className="text-white">Onde assistir o seu filme desejado!</p>
-        <MainButton onClick={handleEnter}>Entrar</MainButton>
+      <div className="p-2">
+        <Image src={landingPageImage} alt={"img"} />
+        <div className="mx-auto flex w-64 flex-col items-center gap-6">
+          <h1 className="text-3xl font-bold text-white">Where To Watch</h1>
+          <p className="text-white">Onde assistir o seu filme desejado!</p>
+          <MainButton onClick={handleEnter}>Entrar</MainButton>
+        </div>
       </div>
+
     </div>
   );
 }

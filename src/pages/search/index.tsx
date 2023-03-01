@@ -13,9 +13,11 @@ const Search = (): ReactElement => {
   const [searchQuery, setSearchQuery] = useState("");
   const [movies, setMovies] = useState();
   const [tvs, setTvs] = useState();
+  const [page, setPage] = useState(1);
 
   const onCategoriesButtonClick = (category: "movie" | "tv") => {
     setActiveButton(category);
+    localStorage.setItem("type", category);
   };
 
   const getMoviesByQuery = useCallback(async () => {
@@ -43,6 +45,17 @@ const Search = (): ReactElement => {
   }, [searchQuery, activeButton]);
 
   useEffect(() => {
+    localStorage.getItem("searchQuery") &&
+      setSearchQuery(localStorage.getItem("searchQuery") as string);
+
+    localStorage.getItem("page")
+      ? setPage(Number(localStorage.getItem("page")))
+      : setPage(1);
+
+    localStorage.getItem("type")
+      ? setActiveButton(localStorage.getItem("type") as "movie" | "tv")
+      : setActiveButton("movie");
+
     getMoviesByQuery();
   }, [getMoviesByQuery]);
 
@@ -69,6 +82,7 @@ const Search = (): ReactElement => {
       <SearchPageInput
         onKeyDown={(e) => {
           if (e.key === "Enter") {
+            localStorage.setItem("searchQuery", e.currentTarget.value);
             setSearchQuery(e.currentTarget.value);
           }
         }}
