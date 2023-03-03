@@ -17,6 +17,7 @@ const bestsMovies = process.env.BASE_URL;
 const Home = (): ReactElement => {
   const [movies, setMovies] = useState<movieProps[]>([]);
   const [series, setSeries] = useState<tvProps[]>([]);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const getData = useCallback(async () => {
     try {
@@ -38,7 +39,8 @@ const Home = (): ReactElement => {
 
   return (
     <div className="p-4">
-      <MainInput />
+      <MainInput/>
+      <p>{searchQuery}</p>
       <div className="mb-4">
         <span className="darkT font-axiforma dark:text-white">Categorias</span>
         <div className="flex h-36 gap-4">
