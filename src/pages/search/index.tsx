@@ -33,7 +33,7 @@ const Search = (): ReactElement => {
     window.scroll({
       top: 0,
       behavior: "smooth",
-    })
+    });
   };
 
   const getMoviesByQuery = useCallback(async () => {
@@ -101,10 +101,13 @@ const Search = (): ReactElement => {
           if (e.key === "Enter") {
             localStorage.setItem("searchQuery", e.currentTarget.value);
             setSearchQuery(e.currentTarget.value);
+            localStorage.setItem("page", "1");
+            setPage(1);
           }
         }}
         searchQuery={searchQuery}
         onHandleSearch={setSearchQuery}
+        setPage={setPage}
       />
 
       <ResultsWrapper

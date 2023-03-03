@@ -45,11 +45,13 @@ interface SearchPageInputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
   searchQuery: string;
   onHandleSearch: Dispatch<SetStateAction<string>>;
+  setPage: Dispatch<SetStateAction<number>>;
 }
 
 export const SearchPageInput = ({
   searchQuery,
   onHandleSearch,
+  setPage,
   ...rest
 }: SearchPageInputProps): ReactElement => {
   const [searchText, setSearchText] = useState(searchQuery);
@@ -71,6 +73,8 @@ export const SearchPageInput = ({
         <BsSearch
           onClick={() => {
             onHandleSearch(searchText);
+            setPage(1);
+            localStorage.setItem("page", "1");
             localStorage.setItem("searchQuery", searchText);
           }}
           className="absolute right-4 top-1/2 z-10 h-6 w-6 -translate-y-1/2 text-white"
