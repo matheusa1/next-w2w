@@ -15,7 +15,7 @@ const MainButton = ({ children, active, ...rest }: Props): ReactElement => {
           className={`${
             active
               ? "bg-transparent text-white"
-              : "bg-slate-200 text-black hover:bg-slate-800 active:bg-transparent dark:bg-blackBg dark:text-white"
+              : "bg-slate-200 text-black hover:bg-slate-800 hover:text-white active:bg-transparent dark:bg-blackBg dark:hover:bg-transparent dark:text-white"
           } w-full rounded-full  py-2 font-bold darkT  `}
         >
           {children}
