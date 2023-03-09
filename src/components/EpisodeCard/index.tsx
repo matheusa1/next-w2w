@@ -13,18 +13,24 @@ const GetImage = process.env.IMAGE;
 const EpisodeCard = (props: SeasonCardProps): ReactElement => {
   const { still_path, title, release_date, episode_number } = props;
   return (
-    <div className="flex w-fit flex-col">
+    <div className="flex h-auto w-full flex-col gap-1">
       <Image
+        className="mx-auto"
         src={`${GetImage}${still_path}`}
         alt={"episode image"}
         width={300}
         height={300}
       />
       <div className="flex justify-between">
-        <h3>{title}</h3>
-        <p>Episodio: {episode_number}</p>
+        <span className="text-xs">{title}</span>
+        <p className="text-xs">Episodio: {episode_number}</p>
       </div>
-      <p className="text-center">{release_date}</p>
+      <p className="text-xs">
+        Lançado:{" "}
+        {`${release_date.split("-")[2]}/${release_date.split("-")[1]}/${
+          release_date.split("-")[0]
+        }`}
+      </p>
     </div>
   );
 };
