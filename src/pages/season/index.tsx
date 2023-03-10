@@ -16,6 +16,17 @@ const Season = (): ReactElement => {
   const [serieId, setSeriesId] = useState<number>();
   const [seasonInfo, setSeriesInfo] = useState<TvSeasonDetailsProps>();
 
+  const onHandleEpisodeClick = (episodeNumber: number) => {
+    router.push({
+      pathname: "/episode",
+      query: {
+        serieId: serieId,
+        seasonNumber: seasonNumber,
+        episodeNumber: episodeNumber,
+      },
+    });
+  };
+
   const getData = useCallback(() => {
     if (!seasonNumber || !serieId) return;
 
@@ -52,7 +63,7 @@ const Season = (): ReactElement => {
       />
       <div className="darkT darkT relative mt-96 flex min-h-full flex-col bg-white dark:bg-blackBg md:mb-4 md:ml-64 md:mr-4 md:mt-0 md:min-h-full md:w-full md:rounded-xl md:shadow-xl md:dark:bg-black dark:md:shadow-blue-900 lg:ml-80 xl:ml-[26rem]">
         <div className="absolute -top-20 h-20 w-full bg-linearPropsLight dark:bg-linearProps md:hidden" />
-        <div className="flex flex-col gap-4 p-6 dark:text-white w-screen">
+        <div className="flex w-screen flex-col gap-4 p-6 dark:text-white md:w-full">
           <div className="flex flex-col gap-2">
             <div className="flex items-center gap-2">
               <strong className="text-2xl font-bold">{seasonInfo?.name}</strong>
@@ -66,16 +77,20 @@ const Season = (): ReactElement => {
           </div>
 
           <span className="text-xl font-bold">Episódios:</span>
-          <div className="grid grid-cols-1 gap-4 w-full">
+          <div className="mx-auto grid w-fit grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
             {seasonInfo?.episodes.map((episode) => {
               return (
-                <EpisodeCard
-                  still_path={episode?.still_path}
-                  title={episode?.name}
-                  release_date={episode?.air_date}
+                <div
                   key={episode.id}
-                  episode_number={episode?.episode_number}
-                />
+                  onClick={() => onHandleEpisodeClick(episode.episode_number)}
+                >
+                  <EpisodeCard
+                    still_path={episode?.still_path}
+                    title={episode?.name}
+                    release_date={episode?.air_date}
+                    episode_number={episode?.episode_number}
+                  />
+                </div>
               );
             })}
           </div>

@@ -13,9 +13,9 @@ const GetImage = process.env.IMAGE;
 const EpisodeCard = (props: SeasonCardProps): ReactElement => {
   const { still_path, title, release_date, episode_number } = props;
   return (
-    <div className="flex h-auto w-full flex-col gap-1">
+    <div className="hover:scale-105 transition-all flex h-auto w-fit flex-col gap-1">
       <Image
-        className="mx-auto"
+        className="mx-auto rounded-lg"
         src={`${GetImage}${still_path}`}
         alt={"episode image"}
         width={300}
