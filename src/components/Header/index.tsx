@@ -4,7 +4,7 @@ import { BsGrid, BsList, BsSearch } from "react-icons/bs";
 import MenuItem from "../MenuItem";
 
 import { switchTheme } from "@/utils/switchTheme";
-import { BiLeftArrowAlt } from "react-icons/bi";
+import { AiOutlineHome } from "react-icons/ai";
 import { FaLightbulb } from "react-icons/fa";
 
 import * as Dialog from "@radix-ui/react-dialog";
@@ -127,13 +127,12 @@ const Header = (): ReactElement => {
             className={`${
               selected === "series" ||
               selected === "movie" ||
-              selected === "season" ||
-              selected === "episode"
+              selected === "season"
                 ? "text-white"
                 : "dark:text-white"
             }`}
           >
-            <BiLeftArrowAlt className={`h-8 w-8`} />
+            <AiOutlineHome className={`h-6 w-6`} />
           </Link>
         ) : (
           <div />
@@ -143,8 +142,7 @@ const Header = (): ReactElement => {
           className={` h-6 w-6 text-slate-900 transition-all duration-300 hover:scale-110 hover:text-blue-300 active:text-purple-400 ${
             selected === "series" ||
             selected === "movie" ||
-            selected === "season" ||
-            selected === "episode"
+            selected === "season"
               ? "text-white"
               : "dark:text-white"
           }`}
@@ -156,8 +154,7 @@ const Header = (): ReactElement => {
               className={`${
                 selected === "series" ||
                 selected === "movie" ||
-                selected === "season" ||
-                selected === "episode"
+                selected === "season"
                   ? "text-white"
                   : "dark:text-white"
               } h-5 w-5`}
