@@ -32,6 +32,16 @@ const Series = (): ReactElement => {
     }
   }, [id]);
 
+  const onSeasonHandleClick = (number: number) => {
+    router.push({
+      pathname: `/season`,
+      query: {
+        serie_id: seriesInfo?.id,
+        season_number: number,
+      },
+    });
+  };
+
   useEffect(() => {
     if (router.isReady) {
       const id = router.query.id;
@@ -48,7 +58,7 @@ const Series = (): ReactElement => {
       {seriesInfo ? (
         <div className="flex h-full">
           <Image
-            className="absolute top-0 left-0 -z-10 h-auto w-full brightness-75 md:brightness-100 md:fixed md:left-4 md:top-1/2 md:w-56 md:-translate-y-1/2 md:rounded-2xl md:shadow-xl md:dark:shadow-purple-900 lg:w-72 xl:w-96"
+            className="absolute top-0 left-0 -z-10 h-auto w-full brightness-75 md:fixed md:left-4 md:top-1/2 md:w-56 md:-translate-y-1/2 md:rounded-2xl md:shadow-xl md:brightness-100 md:dark:shadow-purple-900 lg:w-72 xl:w-96"
             width={300}
             height={450}
             priority
@@ -70,11 +80,12 @@ const Series = (): ReactElement => {
                   status={seriesInfo?.status}
                 />
 
-                <div className="scrollbar flex w-[90vw] md:w-[60vw] lg:w-[65vw] 2xl:w-[70vw] gap-10 overflow-x-auto pb-4">
+                <div className="scrollbar flex w-[90vw] gap-10 overflow-x-auto overflow-y-visible pb-4 md:w-[60vw] lg:w-[65vw] 2xl:w-[70vw]">
                   {seriesInfo?.seasons?.map((season) => (
                     <div
                       key={season.id}
-                      className="flex min-w-[100px] flex-col gap-2"
+                      className="flex min-w-[100px] cursor-pointer flex-col gap-2 transition-all hover:scale-105"
+                      onClick={() => onSeasonHandleClick(season.season_number)}
                     >
                       <div className="flex flex-col items-center">
                         <span className="text-subTitle">
