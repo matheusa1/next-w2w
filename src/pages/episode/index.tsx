@@ -47,17 +47,17 @@ const Episode = (): ReactElement => {
   }, [getData]);
 
   return (
-    <div className="flex flex-col gap-4 dark:text-white">
+    <div className="flex flex-col gap-4 dark:text-white md:grid md:grid-cols-3 md:gap-4 md:p-10">
       <Image
-        className="h-auto w-full"
+        className="h-auto w-full md:col-span-1 md:rounded-xl"
         src={`${GetImage}${episodeInfo?.still_path}`}
         alt={""}
         width={300}
         height={300}
       />
-      <div className="flex flex-col gap-4 px-4">
-        <span className="text-lg">{episodeInfo?.name}</span>
-        <span className="text-xs">{episodeInfo?.overview}</span>
+      <div className="flex flex-col gap-4 px-4 md:col-span-2">
+        <span className="text-lg lg:text-3xl">{episodeInfo?.name}</span>
+        <span className="text-xs lg:text-lg">{episodeInfo?.overview}</span>
         <div className="flex flex-col gap-1 dark:text-white">
           <span className="text-base">
             Temporada: {episodeInfo?.season_number}
@@ -73,10 +73,10 @@ const Episode = (): ReactElement => {
         </div>
         {episodeInfo?.guest_stars.length ? (
           <>
-            <span>Elenco:</span>
-            <div className="flex flex-col gap-3">
+            <span className="lg:text-xl">Elenco:</span>
+            <div className="flex flex-col gap-3 xl:grid xl:grid-cols-3 xl:gap-y-10">
               {episodeInfo?.guest_stars.map((guest) => (
-                <span
+                <div
                   key={guest.id}
                   className="flex w-fit items-center gap-4 text-base"
                 >
@@ -101,7 +101,7 @@ const Episode = (): ReactElement => {
                       description={guest?.popularity}
                     />
                   </div>
-                </span>
+                </div>
               ))}
             </div>
           </>
