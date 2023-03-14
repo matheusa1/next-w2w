@@ -3,6 +3,9 @@ module.exports = {
   darkMode: "class",
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
+    fontFamily: {
+      axiforma: ["Axiforma", "sans-serif"],
+    },
     extend: {
       colors: {
         blackBg: "#18181B",

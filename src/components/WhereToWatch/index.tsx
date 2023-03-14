@@ -11,7 +11,7 @@ const WhereToWatch = ({ providers }: WhereListProps): ReactElement => {
   return (
     <>
       {providers ? (
-        <div className="flex flex-col gap-2 w-fit items-center">
+        <div className="mx-auto flex w-fit flex-col items-center gap-2 md:mx-0">
           <span>Onde Assistir:</span>
           <div className="flex flex-col gap-2">
             <ListWatchProvider title={"Streaming"} list={providers?.flatrate} />
@@ -27,7 +27,8 @@ const WhereToWatch = ({ providers }: WhereListProps): ReactElement => {
         </div>
       ) : (
         <div className="flex flex-col gap-2 text-center">
-          Onde Assistir: <span className="text-subTitle text-xs">Indisponível</span>
+          Onde Assistir:{" "}
+          <span className="text-xs text-subTitle">Indisponível</span>
         </div>
       )}
     </>

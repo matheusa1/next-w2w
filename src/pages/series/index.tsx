@@ -81,34 +81,43 @@ const Series = (): ReactElement => {
                 />
 
                 <div className="scrollbar flex w-[90vw] gap-10 overflow-x-auto overflow-y-visible pb-4 md:w-[60vw] lg:w-[65vw] 2xl:w-[70vw]">
-                  {seriesInfo?.seasons?.map((season) => (
-                    <div
-                      key={season.id}
-                      className="flex min-w-[100px] cursor-pointer flex-col gap-2 transition-all hover:scale-105"
-                      onClick={() => onSeasonHandleClick(season.season_number)}
-                    >
-                      <div className="flex flex-col items-center">
-                        <span className="text-subTitle">
-                          Temporada {season.season_number}
-                        </span>
-                        <Image
-                          className="w-40 rounded-xl"
-                          width={300}
-                          height={450}
-                          src={`${getImageURL}${season.poster_path}`}
-                          alt={"season poster_path"}
-                        />
-                      </div>
-                      <div className="flex flex-col items-center gap-2">
-                        <span className="text-xs">
-                          Episódios: {season.episode_count}
-                        </span>
-                        <div className="flex flex-col items-center text-xs">
-                          Data de estreia<span>{season.air_date}</span>
+                  {seriesInfo?.seasons?.map((season) => {
+                    if (
+                      !season.air_date ||
+                      season.episode_count === 0
+                    )
+                      return null;
+                    return (
+                      <div
+                        key={season.id}
+                        className="flex min-w-[100px] cursor-pointer flex-col gap-2 transition-all hover:scale-105"
+                        onClick={() =>
+                          onSeasonHandleClick(season.season_number)
+                        }
+                      >
+                        <div className="flex flex-col items-center">
+                          <span className="text-subTitle">
+                            Temporada {season.season_number}
+                          </span>
+                          <Image
+                            className="w-40 rounded-xl"
+                            width={300}
+                            height={450}
+                            src={`${getImageURL}${season.poster_path}`}
+                            alt={"season poster_path"}
+                          />
+                        </div>
+                        <div className="flex flex-col items-center gap-2">
+                          <span className="text-xs">
+                            Episódios: {season.episode_count}
+                          </span>
+                          <div className="flex flex-col items-center text-xs">
+                            Data de estreia<span>{season.air_date}</span>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
                 <WhereToWatch providers={providers} />
               </div>
