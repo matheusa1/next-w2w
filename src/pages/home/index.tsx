@@ -9,7 +9,7 @@ import "swiper/css";
 import Deku from "@/assets/deku.svg";
 import Miranha from "@/assets/miranha.svg";
 import { MainInput } from "@/components/MainInput";
-import Link from "next/link";
+import { useRouter } from "next/router";
 
 const apiKey = process.env.API_KEY;
 const bestsMovies = process.env.BASE_URL;
@@ -17,21 +17,52 @@ const bestsMovies = process.env.BASE_URL;
 const Home = (): ReactElement => {
   const [movies, setMovies] = useState<movieProps[]>([]);
   const [series, setSeries] = useState<tvProps[]>([]);
-  const [searchQuery, setSearchQuery] = useState("");
+
+  const router = useRouter();
 
   const getData = useCallback(async () => {
-    try {
-      await axios
-        .get(`${bestsMovies}trending/movie/day?${apiKey}&language=pt-BR`)
-        .then((res) => setMovies(res.data.results));
+    const moviesStorage = localStorage.getItem("movies");
+    const seriesStorage = localStorage.getItem("series");
+    const dataStorage = localStorage.getItem("date");
 
-      await axios
-        .get(`${bestsMovies}trending/tv/day?${apiKey}&language=pt-BR`)
-        .then((res) => setSeries(res.data.results));
+    if (Number(dataStorage) === new Date().getDate()) {
+      if (moviesStorage && seriesStorage) {
+        setMovies(JSON.parse(moviesStorage));
+        setSeries(JSON.parse(seriesStorage));
+        return;
+      }
+    }
+
+    try {
+      const moviesResponse = await axios.get(
+        `${bestsMovies}trending/movie/day?${apiKey}&language=pt-BR`
+      );
+
+      const tvResponse = await axios.get(
+        `${bestsMovies}trending/tv/day?${apiKey}&language=pt-BR`
+      );
+
+      setMovies(moviesResponse.data.results);
+      setSeries(tvResponse.data.results);
+
+      localStorage.setItem(
+        "movies",
+        JSON.stringify(moviesResponse.data.results)
+      );
+      localStorage.setItem("series", JSON.stringify(tvResponse.data.results));
+      localStorage.setItem("date", JSON.stringify(new Date().getDate()));
     } catch (err) {
       console.log(err);
     }
   }, []);
+
+  const navigateToSearch = (str: "movie" | "tv") => {
+    localStorage.setItem("type", str);
+
+    router.push({
+      pathname: "/search",
+    });
+  };
 
   useEffect(() => {
     getData();
@@ -39,13 +70,12 @@ const Home = (): ReactElement => {
 
   return (
     <div className="p-4">
-      <MainInput/>
-      <p>{searchQuery}</p>
+      <MainInput />
       <div className="mb-4">
         <span className="darkT font-axiforma dark:text-white">Categorias</span>
         <div className="flex h-36 gap-4">
-          <Link
-            href={"category"}
+          <div
+            onClick={() => navigateToSearch("movie")}
             className="tm relative w-full cursor-pointer rounded-tm bg-linearCategoryBlue p-4 shadow-lg shadow-blue-300 transition-all duration-300 hover:scale-[1.01] dark:shadow-blue-900 md:rounded-tmMd md:px-8 lg:rounded-tmLg"
           >
             <Image
@@ -62,9 +92,9 @@ const Home = (): ReactElement => {
                 + 850.000 títulos
               </span>
             </div>
-          </Link>
-          <Link
-            href={"category"}
+          </div>
+          <div
+            onClick={() => navigateToSearch("tv")}
             className="relative w-full cursor-pointer rounded-tm2 bg-linearCategoryRed p-4 shadow-xl shadow-red-200 transition-all duration-300 hover:scale-[1.01] dark:shadow-red-900 md:rounded-tm2Md md:px-8 lg:rounded-tm2Lg"
           >
             <Image
@@ -81,7 +111,7 @@ const Home = (): ReactElement => {
                 + 140.000 títulos
               </span>
             </div>
-          </Link>
+          </div>
         </div>
       </div>
       <div className="flex flex-col gap-2">

@@ -1,6 +1,6 @@
 import { ReactElement, useEffect, useState } from "react";
 
-import { BsGrid, BsList, BsSearch } from "react-icons/bs";
+import { BsList, BsSearch } from "react-icons/bs";
 import MenuItem from "../MenuItem";
 
 import { switchTheme } from "@/utils/switchTheme";
@@ -32,7 +32,6 @@ const Header = (): ReactElement => {
   const handleSelected = (
     selected:
       | "home"
-      | "category"
       | "search"
       | "series"
       | "movie"
@@ -48,10 +47,6 @@ const Header = (): ReactElement => {
     if (path === "/home") {
       handleSelected("home");
       setIsBackButtonShown(false);
-      setIsSearchButtonShown(true);
-    } else if (path === "/category") {
-      handleSelected("category");
-      setIsBackButtonShown(true);
       setIsSearchButtonShown(true);
     } else if (path === "/search") {
       handleSelected("search");
@@ -94,12 +89,6 @@ const Header = (): ReactElement => {
             }
           />
 
-          <MenuItem
-            active={selected === "category"}
-            link="/category"
-            icon={<BsGrid className={iconsClassNames} />}
-            text={"Categoria"}
-          />
           <MenuItem
             active={selected === "search"}
             link="/search"

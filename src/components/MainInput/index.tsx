@@ -1,5 +1,11 @@
 import { useRouter } from "next/router";
-import { Dispatch, ReactElement, SetStateAction, useState } from "react";
+import {
+  Dispatch,
+  ReactElement,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
 import { BsSearch } from "react-icons/bs";
 // import { Container } from './styles';
 
@@ -55,6 +61,10 @@ export const SearchPageInput = ({
   ...rest
 }: SearchPageInputProps): ReactElement => {
   const [searchText, setSearchText] = useState(searchQuery);
+
+  useEffect(() => {
+    setSearchText(searchQuery);
+  }, [searchQuery]);
 
   return (
     <div className="flex flex-col gap-2">
