@@ -46,7 +46,7 @@ export const TrendingMovieCard = (
 
   return (
     <div
-      className="relative cursor-pointer rounded-2xl transition-all hover:scale-[1.01]"
+      className="relative cursor-pointer rounded-2xl transition-all hover:scale-[1.01] max-w-lg"
       onClick={onHandleClick}
     >
       <Image

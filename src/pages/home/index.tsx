@@ -3,58 +3,26 @@ import { MoviesCarousel, SeriesCarousel } from "@/components/MoviesCarousel";
 import { movieProps, tvProps } from "@/types";
 import axios from "axios";
 import Image from "next/image";
-import { ReactElement, useCallback, useEffect, useState } from "react";
+import { ReactElement } from "react";
 import "swiper/css";
 
 import Deku from "@/assets/deku.svg";
 import Miranha from "@/assets/miranha.svg";
 import { MainInput } from "@/components/MainInput";
 import { useRouter } from "next/router";
+import { GetStaticProps } from "next";
 
 const apiKey = process.env.API_KEY;
 const bestsMovies = process.env.BASE_URL;
 
-const Home = (): ReactElement => {
-  const [movies, setMovies] = useState<movieProps[]>([]);
-  const [series, setSeries] = useState<tvProps[]>([]);
-
+const Home = ({
+  movies,
+  series,
+}: {
+  movies: movieProps[];
+  series: tvProps[];
+}): ReactElement => {
   const router = useRouter();
-
-  const getData = useCallback(async () => {
-    const moviesStorage = localStorage.getItem("movies");
-    const seriesStorage = localStorage.getItem("series");
-    const dataStorage = localStorage.getItem("date");
-
-    if (Number(dataStorage) === new Date().getDate()) {
-      if (moviesStorage && seriesStorage) {
-        setMovies(JSON.parse(moviesStorage));
-        setSeries(JSON.parse(seriesStorage));
-        return;
-      }
-    }
-
-    try {
-      const moviesResponse = await axios.get(
-        `${bestsMovies}trending/movie/day?${apiKey}&language=pt-BR`
-      );
-
-      const tvResponse = await axios.get(
-        `${bestsMovies}trending/tv/day?${apiKey}&language=pt-BR`
-      );
-
-      setMovies(moviesResponse.data.results);
-      setSeries(tvResponse.data.results);
-
-      localStorage.setItem(
-        "movies",
-        JSON.stringify(moviesResponse.data.results)
-      );
-      localStorage.setItem("series", JSON.stringify(tvResponse.data.results));
-      localStorage.setItem("date", JSON.stringify(new Date().getDate()));
-    } catch (err) {
-      console.log(err);
-    }
-  }, []);
 
   const navigateToSearch = (str: "movie" | "tv") => {
     localStorage.setItem("type", str);
@@ -63,10 +31,6 @@ const Home = (): ReactElement => {
       pathname: "/search",
     });
   };
-
-  useEffect(() => {
-    getData();
-  }, [getData]);
 
   return (
     <div className="p-4">
@@ -135,3 +99,21 @@ const Home = (): ReactElement => {
 };
 
 export default Home;
+
+export const getStaticProps: GetStaticProps = async () => {
+  const moviesResponse = await axios.get(
+    `${bestsMovies}trending/movie/day?${apiKey}&language=pt-BR`
+  );
+
+  const tvResponse = await axios.get(
+    `${bestsMovies}trending/tv/day?${apiKey}&language=pt-BR`
+  );
+
+  return {
+    props: {
+      movies: moviesResponse.data.results,
+      series: tvResponse.data.results,
+    },
+    revalidate: 60 * 60 * 24, // 24 hours
+  };
+};

@@ -34,7 +34,7 @@ export default function LandingPage(): ReactElement {
         >
           <SwiperSlide className="h-full w-full">
             <Image className="object-contain" src={starWars} alt={"starWars"} />
-          </SwiperSlide>
+          </SwiperSlide>  
           <SwiperSlide className="h-full w-full">
             <Image className="object-contain" src={Avengers} alt={"Avengers"} />
           </SwiperSlide>
